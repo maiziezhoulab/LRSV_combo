@@ -1,7 +1,9 @@
 # LRSV_combo
 
 # Table of contents
-[Datasets](#datasets)
+* [Datasets](#Datasets)
+* [Datasets](#Datasets)
+* [Datasets](#Datasets)
 
 # Datasets
 ## Pacbio
