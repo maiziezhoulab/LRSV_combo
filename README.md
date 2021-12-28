@@ -5,7 +5,7 @@
   - [Pacbio](#Pacbio)
   - [Oxford Nanopore Technologies](#Oxford-Nanopore-Technologies)
 - [Alignment Based SV Callers](#Alignment-Based-SV-Callers)
-  - [cuteSV](#cuteSV)
+  - [cuteSV](#cute-SV)
 
 # Datasets
 ## Pacbio
