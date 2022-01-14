@@ -30,9 +30,21 @@ https://github.com/ydLiu-HIT/SKSV
 #### Publication:
 https://doi.org/10.1093/bioinformatics/btab341
 ### Installation & Dependencies
+#### Installation
+```
+git clone https://github.com/ydLiu-HIT/SKSV.git
+cd SKSV/skeleton/
+make
+cd ..
+```
 ### Inputs & Outputs
 ### Commands used
 ### Other notes
+If you see the error
+```
+‘for’ loop initial declarations are only allowed in C99 mode
+```
+Try again with a newer version of gcc. Here we use GCC/10.2.0
 
 ## cuteSV
 ### Project Links
