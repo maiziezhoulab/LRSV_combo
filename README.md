@@ -39,6 +39,18 @@ cd ..
 ```
 ### Inputs & Outputs
 ### Commands used
+```
+ref=your_reference_file.fasta
+fastq=your_read_file.fastq
+out_prefix=the_desired_prefix_of_the_output(name of output files)
+out_dir=.
+
+SKSV=/path/to/SKSV/SKSV
+
+time ${SKSV} index ${ref} ${out_dir}
+time ${SKSV} aln ${out_dir} ${fastq} --output sk.svseg 
+time ${SKSV} call --genotype --print_allele_seq --read ${fastq} sk.svseg ${ref} ${out_prefix}.vcf ${out_dir}
+```
 ### Other notes
 If you see the error
 ```
