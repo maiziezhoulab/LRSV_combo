@@ -5,7 +5,15 @@
   - [Pacbio](#Pacbio)
   - [Oxford Nanopore Technologies](#Oxford-Nanopore-Technologies)
 - [Alignment Based SV Callers](#Alignment-Based-SV-Callers)
+  - [SKSV](#SKSV)
   - [cuteSV](#cuteSV)
+  - [NanoVar](#NanoVar)
+  - [pbsv](#pbsv)
+  - [SVIM](#SVIM)
+  - [Sniffles](#Sniffles)
+  - [Smartie-sv](#Smartie-sv)
+  - [NanoSV](#NanoSV)
+  - [PBHoney](#PBHoney)
 - [Assembly Based SV Callers](#Assembly-Based-SV-Callers)
 - [Other SV Callers](#Other-SV-Callers)
 
@@ -15,7 +23,63 @@
 ## Oxford Nanopore Technologies
 
 # Alignment Based SV Callers
+## SKSV
+### Project Links
+### Installation & Dependencies
+### Inputs & Outputs
+### Commands used
+### Other notes
+
 ## cuteSV
+### Project Links
+### Installation & Dependencies
+### Inputs & Outputs
+### Commands used
+### Other notes
+
+## NanoVar
+### Project Links
+### Installation & Dependencies
+### Inputs & Outputs
+### Commands used
+### Other notes
+
+## pbsv
+### Project Links
+### Installation & Dependencies
+### Inputs & Outputs
+### Commands used
+### Other notes
+
+## SVIM
+### Project Links
+### Installation & Dependencies
+### Inputs & Outputs
+### Commands used
+### Other notes
+
+## Sniffles
+### Project Links
+### Installation & Dependencies
+### Inputs & Outputs
+### Commands used
+### Other notes
+
+## Smartie-sv
+### Project Links
+### Installation & Dependencies
+### Inputs & Outputs
+### Commands used
+### Other notes
+
+## NanoSV
+### Project Links
+### Installation & Dependencies
+### Inputs & Outputs
+### Commands used
+### Other notes
+
+## PBHoney
 ### Project Links
 ### Installation & Dependencies
 ### Inputs & Outputs
