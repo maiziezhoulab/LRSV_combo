@@ -54,9 +54,12 @@ out_dir=.
 
 SKSV=/path/to/SKSV/SKSV
 
-time ${SKSV} index ${ref} ${out_dir} # build index    
-time ${SKSV} aln ${out_dir} ${fastq} --output sk.svseg # skeleton-alignment
-time ${SKSV} call --genotype --print_allele_seq --read ${fastq} sk.svseg ${ref} ${out_prefix}.vcf ${out_dir} # call variants using in.svseg file
+# build index
+time ${SKSV} index ${ref} ${out_dir} 
+# skeleton-alignment
+time ${SKSV} aln ${out_dir} ${fastq} --output sk.svseg 
+# call variants using in.svseg file
+time ${SKSV} call --genotype --print_allele_seq --read ${fastq} sk.svseg ${ref} ${out_prefix}.vcf ${out_dir} 
 ```
 ### Other notes
 #### Common problems
