@@ -37,6 +37,13 @@ cd SKSV/skeleton/
 make
 cd ..
 ```
+#### Dependencies
+```
+python3
+Biopython
+numpy
+samtools  # samtools was used to extract read sequence in order to generate allele sequence.
+```
 ### Inputs & Outputs
 ### Commands used
 ```
@@ -47,16 +54,17 @@ out_dir=.
 
 SKSV=/path/to/SKSV/SKSV
 
-time ${SKSV} index ${ref} ${out_dir}
-time ${SKSV} aln ${out_dir} ${fastq} --output sk.svseg 
-time ${SKSV} call --genotype --print_allele_seq --read ${fastq} sk.svseg ${ref} ${out_prefix}.vcf ${out_dir}
+time ${SKSV} index ${ref} ${out_dir} # build index    
+time ${SKSV} aln ${out_dir} ${fastq} --output sk.svseg # skeleton-alignment
+time ${SKSV} call --genotype --print_allele_seq --read ${fastq} sk.svseg ${ref} ${out_prefix}.vcf ${out_dir} # call variants using in.svseg file
 ```
 ### Other notes
+#### Common problems
 If you see the error
 ```
 ‘for’ loop initial declarations are only allowed in C99 mode
 ```
-Try again with a newer version of gcc. Here we use GCC/10.2.0
+try again with a newer version of gcc. Here we use GCC/10.2.0
 
 ## cuteSV
 ### Project Links
