@@ -25,6 +25,12 @@
 # Alignment Based SV Callers
 ## SKSV
 ### Project Links
+#### Github Repo:
+```
+https://github.com/ydLiu-HIT/SKSV
+```
+#### Publication:
+https://doi.org/10.1093/bioinformatics/btab341
 ### Installation & Dependencies
 ### Inputs & Outputs
 ### Commands used
