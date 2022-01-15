@@ -106,6 +106,8 @@ try again with a newer version of gcc. Here we use GCC/10.2.0
 
 ## Smartie-sv
 ### Project Links
+#### Publication:
+https://www.science.org/doi/10.1126/science.aar6343
 ### Installation & Dependencies
 ### Inputs & Outputs
 ### Commands used
