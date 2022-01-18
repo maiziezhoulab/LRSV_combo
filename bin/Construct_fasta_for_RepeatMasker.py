@@ -36,6 +36,10 @@ def construct_fasta_RepeatMasker(vcf,sample,sv_caller,out_dir):
     pickle.dump(sinfo,open('./'+sv_caller+'_'+sample+'_sequence_info.pkl',"wb"))
 
 
-construct_fasta_RepeatMasker('pbsv_NA24385_NGMLR.vcf','NA24385_CCS_NGMLR','pbsv','.')
-construct_fasta_RepeatMasker('Sniffles_NA24385_NGMLR.vcf','NA24385_CCS_NGMLR','Sniffles','.')
-construct_fasta_RepeatMasker('SKSV_NA24385_Pacbio_CCS.vcf','NA24385_CCS','SKSV','.')
+#construct_fasta_RepeatMasker('pbsv_NA24385_NGMLR.vcf','NA24385_CCS_NGMLR','pbsv','.')
+#construct_fasta_RepeatMasker('Sniffles_NA24385_NGMLR.vcf','NA24385_CCS_NGMLR','Sniffles','.')
+#construct_fasta_RepeatMasker('SKSV_NA24385_Pacbio_CCS.vcf','NA24385_CCS','SKSV','.')
+
+construct_fasta_RepeatMasker('Sniffles_INS_DEL_50_/fn.vcf','NA24385_CCS_NGMLR_FN','Sniffles','.')
+construct_fasta_RepeatMasker('Sniffles_INS_DEL_50_/fp.vcf','NA24385_CCS_NGMLR_FP','Sniffles','.')
+construct_fasta_RepeatMasker('Sniffles_INS_DEL_50_/tp-call.vcf','NA24385_CCS_NGMLR_TP','Sniffles','.')

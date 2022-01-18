@@ -265,8 +265,8 @@ def plot_overlap_by_callers(vcf_file,save_dir,sv_types=['ALL','DEL','INS']):
     for sv_type in overlap_dict.keys():
         overlap_df = pd.DataFrame(overlap_dict[sv_type], index=all_sv_callers,)
         fig, ax = plt.subplots(figsize=(8,4))
-        #overlap_df.plot.bar(stacked=True,ax=ax,colormap='Blues_r', edgecolor='gray', linewidth=0.2)
-        overlap_df.plot.bar(stacked=True,ax=ax, edgecolor='gray', linewidth=0.2)
+        overlap_df.plot.bar(stacked=True,ax=ax,colormap='Blues_r', edgecolor='gray', linewidth=0.2)
+        #overlap_df.plot.bar(stacked=True,ax=ax, edgecolor='gray', linewidth=0.2)
         matplotlib.rcParams['pdf.fonttype'] = 42
         matplotlib.rcParams['ps.fonttype'] = 42
         plt.legend(bbox_to_anchor=(1.05, 0), loc=3, borderaxespad=0)
