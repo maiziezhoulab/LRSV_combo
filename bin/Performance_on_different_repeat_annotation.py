@@ -36,7 +36,7 @@ def plot_perf_on_diff_rep_anno(result_df,tpfpfn_dict,lenth_distrb_dict,sv_caller
     matplotlib.rcParams['pdf.fonttype'] = 42
     matplotlib.rcParams['ps.fonttype'] = 42
     plt.legend(bbox_to_anchor=(1.05, 0), loc=3, borderaxespad=0)
-    plt.savefig(save_dir+'/'+sv_caller+'_performance_on_different_repeat_percentage.pdf',bbox_inches='tight')
+    plt.savefig(save_dir+'/'+sv_caller+'_performance_on_different_repeat_annotation.pdf',bbox_inches='tight')
     plt.close(fig)
 
 def perf_on_diff_rep_anno(fn,fp,tp,sv_caller,save_dir,include_None_anno=False,topk=5):
