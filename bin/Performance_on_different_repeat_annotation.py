@@ -1,4 +1,3 @@
-import re
 import numpy as np
 import pandas as pd
 
@@ -8,10 +7,11 @@ import matplotlib.pyplot as plt
 
 def plot_perf_on_diff_rep_anno(result_df,tpfpfn_dict,lenth_distrb_dict,sv_caller,save_dir,topk):
 
-    fig = plt.figure(figsize=(8,6))
+    fig = plt.figure(figsize=(topk*3,10))
 
     ax = plt.subplot2grid((3, topk), (1, 0), colspan=topk,rowspan=2)
     result_df.plot.bar(ax=ax,)
+    ax.legend(bbox_to_anchor=(1.05, 0), loc=3, borderaxespad=0)
     ax.tick_params(axis='x',          # changes apply to the x-axis
                    which='both',      # both major and minor ticks are affected
                    bottom=False,      # ticks along the bottom edge are off
@@ -29,17 +29,19 @@ def plot_perf_on_diff_rep_anno(result_df,tpfpfn_dict,lenth_distrb_dict,sv_caller
     len_axes = list()
     for i in range(topk):
         len_axes.append(plt.subplot2grid((3, topk), (0, i),))
+        plt.xticks(fontsize=7)
+        plt.yticks(fontsize=7)
     
     for i,index in enumerate(result_df.index):
-        len_axes[i].hist(lenth_distrb_dict[index],histtype='stepfill') #n_bins,
+        len_axes[i].hist(lenth_distrb_dict[index],histtype='bar',) #n_bins,log=True
+
 
     matplotlib.rcParams['pdf.fonttype'] = 42
     matplotlib.rcParams['ps.fonttype'] = 42
-    plt.legend(bbox_to_anchor=(1.05, 0), loc=3, borderaxespad=0)
     plt.savefig(save_dir+'/'+sv_caller+'_performance_on_different_repeat_annotation.pdf',bbox_inches='tight')
     plt.close(fig)
 
-def perf_on_diff_rep_anno(fn,fp,tp,sv_caller,save_dir,include_None_anno=False,topk=5):
+def perf_on_diff_rep_anno(tp,fp,fn,sv_caller,save_dir,include_None_anno=False,topk=12):
     temp_annot_dict = dict()
     for file_name in [tp,fp,fn]:
         with open(file_name,'r') as f:
@@ -88,3 +90,9 @@ def perf_on_diff_rep_anno(fn,fp,tp,sv_caller,save_dir,include_None_anno=False,to
     result_df = pd.DataFrame(result_dict, index=annos,)
 
     plot_perf_on_diff_rep_anno(result_df,tpfpfn_dict,lenth_distrb_dict,sv_caller,save_dir,topk)
+
+
+perf_on_diff_rep_anno('Sniffles_NA24385_CCS_NGMLR_TP_repeat_persentage_info.txt',
+'Sniffles_NA24385_CCS_NGMLR_FP_repeat_persentage_info.txt',
+'Sniffles_NA24385_CCS_NGMLR_FN_repeat_persentage_info.txt',
+'Sniffles','.')

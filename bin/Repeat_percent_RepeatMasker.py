@@ -63,12 +63,12 @@ def process_repeatmasker_results(RM_input,sequence_info_file,out_dir):
                 perc = float(repeat_masker_results[key][0])/repeat_masker_results[key][1]*100
                 if perc > 100:
                     perc = 100 #clip
-                anno = ';'.join(set(repeat_masker_results[key][2]))
+                anno = ';'.join(set(sorted(repeat_masker_results[key][2])))
                 percenf.write('%.1f%%\t%s\n'%(perc,anno))
 
 
 #process_repeatmasker_results('./RM2_Sniffles_NA24385_CCS_NGMLR.fasta_1642020574.out','./Sniffles_NA24385_CCS_NGMLR_sequence_info.pkl','.')
 
-#process_repeatmasker_results('./RM2_Sniffles_NA24385_CCS_NGMLR_FN.fasta_1642415126.out','./Sniffles_NA24385_CCS_NGMLR_FN_sequence_info.pkl','.')
-#process_repeatmasker_results('./RM2_Sniffles_NA24385_CCS_NGMLR_FP.fasta_1642415173.out','./Sniffles_NA24385_CCS_NGMLR_FP_sequence_info.pkl','.')
+process_repeatmasker_results('./RM2_Sniffles_NA24385_CCS_NGMLR_FN.fasta_1642415126.out','./Sniffles_NA24385_CCS_NGMLR_FN_sequence_info.pkl','.')
+process_repeatmasker_results('./RM2_Sniffles_NA24385_CCS_NGMLR_FP.fasta_1642415173.out','./Sniffles_NA24385_CCS_NGMLR_FP_sequence_info.pkl','.')
 process_repeatmasker_results('./RM2_Sniffles_NA24385_CCS_NGMLR_TP.fasta_1642415280.out','./Sniffles_NA24385_CCS_NGMLR_TP_sequence_info.pkl','.')
