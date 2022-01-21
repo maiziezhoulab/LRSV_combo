@@ -125,7 +125,10 @@ def vcf_regularization(vlf,out_dir,output_reg_vcfs=True):
 
                         svtype = re.findall("SVTYPE=(\w+)",line)[0]
                         svlen  = re.findall("SVLEN=(-?\d+)",line)[0]
-                        end    = re.findall("END=(\d+)",line)[0]
+                        try:
+                            end = re.findall("END=(\d+)",line)[0]
+                        except:
+                            end = None
                         genotype = sample_field[format_field.index('GT')]
 
                         if field_index==7:
@@ -141,10 +144,16 @@ def vcf_regularization(vlf,out_dir,output_reg_vcfs=True):
                             elif info_type=='count':
                                 support = str(len(support_))
 
+                        new_line = fields[0]+'\t'+fields[1]+'\t'+fields[2]+'\tN\t<'+svtype+'>\t'+fields[5]+'\t'+fields[6]+'\t'+'SVTYPE='+svtype
+                        if end is not None:
+                            new_line = new_line+';END='+end
+                        new_line = new_line+';SVLEN='+svlen
+
+                        
                         if SR_Tag is not None:
-                            new_line = fields[0]+'\t'+fields[1]+'\t'+fields[2]+'\tN\t<'+svtype+'>\t'+fields[5]+'\t'+fields[6]+'\t'+'SVTYPE='+svtype+';END='+end+';SVLEN='+svlen+';SUPPORT='+support+';SC='+sv_caller+'\tGT\t'+genotype+'\n'
-                        else:
-                            new_line = fields[0]+'\t'+fields[1]+'\t'+fields[2]+'\tN\t<'+svtype+'>\t'+fields[5]+'\t'+fields[6]+'\t'+'SVTYPE='+svtype+';END='+end+';SVLEN='+svlen+';SC='+sv_caller+'\tGT\t'+genotype+'\n'
+                            new_line = new_line+';SUPPORT='+support
+                        new_line = new_line+';SC='+sv_caller+'\tGT\t'+genotype+'\n'
+
                         new_vcf.write(new_line)
 
     if output_reg_vcfs:
