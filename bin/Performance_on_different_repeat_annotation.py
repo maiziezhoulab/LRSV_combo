@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib
 matplotlib.use('agg')
 import matplotlib.pyplot as plt
+from matplotlib.ticker import EngFormatter
 
 def plot_perf_on_diff_rep_anno(result_df,tpfpfn_dict,lenth_distrb_dict,sv_caller,save_dir,topk):
 
@@ -31,9 +32,18 @@ def plot_perf_on_diff_rep_anno(result_df,tpfpfn_dict,lenth_distrb_dict,sv_caller
         len_axes.append(plt.subplot2grid((3, topk), (0, i),))
         plt.xticks(fontsize=7)
         plt.yticks(fontsize=7)
+        plt.xlabel("SV length")
+        #plt.rcParams['axes.autolimit_mode'] = 'round_numbers'
+        if i==0:
+            plt.ylabel("SV count")
     
+    formatter = EngFormatter(sep="") #places=1,
     for i,index in enumerate(result_df.index):
-        len_axes[i].hist(lenth_distrb_dict[index],histtype='bar',) #n_bins,log=True
+        len_axes[i].hist(lenth_distrb_dict[index],histtype='bar',bins=30,log=True) #n_bins,log=True
+        #tcks = len_axes[i].get_xticks()
+        #tcks[-1] = max(lenth_distrb_dict[index])
+        #len_axes[i].set_xticks(tcks)
+        len_axes[i].xaxis.set_major_formatter(formatter)
 
 
     matplotlib.rcParams['pdf.fonttype'] = 42
@@ -41,7 +51,7 @@ def plot_perf_on_diff_rep_anno(result_df,tpfpfn_dict,lenth_distrb_dict,sv_caller
     plt.savefig(save_dir+'/'+sv_caller+'_performance_on_different_repeat_annotation.pdf',bbox_inches='tight')
     plt.close(fig)
 
-def perf_on_diff_rep_anno(tp,fp,fn,sv_caller,save_dir,include_None_anno=False,topk=12):
+def perf_on_diff_rep_anno(tp,fp,fn,sv_caller,save_dir,include_None_anno=True,topk=12):
     temp_annot_dict = dict()
     for file_name in [tp,fp,fn]:
         with open(file_name,'r') as f:

@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib
 matplotlib.use('agg')
 import matplotlib.pyplot as plt
+from matplotlib.ticker import EngFormatter
 
 def plot_perf_on_diff_rep_percent(result_df,tpfpfn_dict,length_list,sv_caller,save_dir):
     fig = plt.figure(figsize=(15,10))
@@ -32,10 +33,14 @@ def plot_perf_on_diff_rep_percent(result_df,tpfpfn_dict,length_list,sv_caller,sa
         len_axes.append(plt.subplot2grid((3, interval_num), (0, i),))
         plt.xticks(fontsize=7)
         plt.yticks(fontsize=7)
+        plt.xlabel("SV length")
+        if i==0:
+            plt.ylabel("SV count")
     
+    formatter = EngFormatter(sep="") #places=1,
     for i in range(interval_num):
-        len_axes[i].hist(length_list[i],histtype='bar',) #n_bins,log=True
-
+        len_axes[i].hist(length_list[i],histtype='bar',bins=30,log=True) #n_bins,log=True
+        len_axes[i].xaxis.set_major_formatter(formatter)
 
     matplotlib.rcParams['pdf.fonttype'] = 42
     matplotlib.rcParams['ps.fonttype'] = 42

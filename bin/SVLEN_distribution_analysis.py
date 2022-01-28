@@ -30,7 +30,7 @@ def svlen_distribution_analysis(vlf,out_dir):
     with open(vlf,'r') as vlf_file:
         for line in vlf_file:
             if line[0] != '#':
-                sv_caller, vcf_dir = line.rstrip('\n').split('\t')[:2]
+                sv_caller, vcf_dir = line.rstrip('\n').split('\t')
                 caller_vcf_dict[sv_caller] = vcf_dir
 
     svlen50_1k = dict()
@@ -55,15 +55,12 @@ def svlen_distribution_analysis(vlf,out_dir):
                             break
 
         for key,value in temp_store.items():
-            if key not in svlen50_1k:
-                svlen50_1k[key]=dict()
-                svlen50_1k[key]['Intervals'] = ['[50,200)','[200,400)','[400,600)','[600,800)','[800,1k)']
-            if key not in svlen1k_10k:
-                svlen1k_10k[key]=dict()
-                svlen1k_10k[key]['Intervals'] = ['[1k,2.5k)','[2.5k,5k)','[5k,7.5k)','[7.5k,10k)','[10k,inf)']
+            svlen50_1k[key]=dict()
+            svlen1k_10k[key]=dict()
+            svlen50_1k[key]['Intervals'] = ['[50,200)','[200,400)','[400,600)','[600,800)','[800,1k)']
+            svlen1k_10k[key]['Intervals'] = ['[1k,2.5k)','[2.5k,5k)','[5k,7.5k)','[7.5k,10k)','[10k,inf)']
             svlen50_1k[key][sv_caller] = value[:len(svlen50_1k[key]['Intervals'])]
             svlen1k_10k[key][sv_caller] = value[len(svlen50_1k[key]['Intervals']):]
-
 
     plot_svlen_distribution(svlen50_1k,svlen1k_10k,list(caller_vcf_dict.keys()),out_dir,svtypes=['DEL','INS'])
 
