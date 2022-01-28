@@ -38,7 +38,10 @@ def truvari_results_parser(truvari_results_dir,):
         summary_file = truvari_results_dir+'/'+truvari_result+'/summary.txt'
         summary_dict = read_truvari_summary(summary_file)
         for key in content.keys():
-            content[key].append(str(np.round(summary_dict[key],3)))
+            if summary_dict[key] == 'NaN':
+                content[key].append(summary_dict[key])
+            else:
+                content[key].append(str(np.round(summary_dict[key],3)))
 
     excel_values = [["",]+truvari_results_list]
     for key in content_items:
