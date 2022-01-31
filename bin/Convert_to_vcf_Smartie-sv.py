@@ -1,4 +1,4 @@
-#import numpy as np
+import numpy as np
 
 header = '''##fileformat=VCFv4.2
 ##contig=<ID=chr1,length=249250621>
@@ -35,33 +35,37 @@ header = '''##fileformat=VCFv4.2
 
 '''chr1	899976	900051	deletion	75	+	m64015_190920_185703/27329313/ccs	11022	11022	13090	13063	13170	0.991875	TCCGCAGTGGGGATGTGCTGCGGGGAGGGGGGCGCGGGTCCGCAGTGGGGATGTGCTGCCGGGAGGGGGGCGCGG'''
 
-# def merge_svs(sv_list):
-#     if not sv_list:#if empty
-#         return sv_list
+def merge_svs(sv_list):
+    if not sv_list:#if empty
+        return sv_list
     
-#     merged_sv_list = list()
-#     sv_list = sorted(sv_list, key =lambda x:x[0]) #sort by start position
+    merged_sv_list = list()
+    sv_list = sorted(sv_list, key =lambda x:x[0]) #sort by start position
 
-#     temp_cluster = list()
+    temp_cluster = list()
 
-#     for sv in sv_list:
-#         if not temp_cluster: #if empty
-#             temp_cluster.append(sv)
-#         else:
-#             current_cluster_avg = np.mean(temp_cluster,axis=0).astype(int)
-#             if abs(sv[0]-current_cluster_avg[0])<=10 and abs(sv[1]-current_cluster_avg[1])<=10 and abs(sv[2]-current_cluster_avg[2])<=10:
-#                 temp_cluster.append(sv)
-#             else:
-#                 merged_sv_list.append(list(current_cluster_avg).append(len(temp_cluster)))
-#                 temp_cluster = list()
-#                 temp_cluster.append(sv)
+    for sv in sv_list:
+        if not temp_cluster: #if empty
+            temp_cluster.append(sv)
+        else:
+            current_cluster_avg = np.mean(temp_cluster,axis=0).astype(int)
+            if abs(sv[0]-current_cluster_avg[0])<=10 and abs(sv[2]-current_cluster_avg[2])<=10 and abs(sv[2]-current_cluster_avg[2])<=5:
+                temp_cluster.append(sv)
+            else:
+                merged_sv = list(current_cluster_avg)
+                merged_sv.append(len(temp_cluster))
+                merged_sv_list.append(merged_sv)
+                temp_cluster = list()
+                temp_cluster.append(sv)
 
-#     current_cluster_avg = np.mean(temp_cluster,axis=0).astype(int)
-#     merged_sv_list.append(list(current_cluster_avg).append(len(temp_cluster)))
+    current_cluster_avg = np.mean(temp_cluster,axis=0).astype(int)
+    merged_sv = list(current_cluster_avg)
+    merged_sv.append(len(temp_cluster))
+    merged_sv_list.append(merged_sv)
 
-#     return merged_sv_list
+    return merged_sv_list
 
-def convert_svsbed_to_vcf(input, output):
+def convert_svsbed_to_vcf(input, output, support_thresh):
     chrnums = ['chr'+str(i) for i in range(1,23)]
 
     SV_del_temp = dict()
@@ -88,19 +92,23 @@ def convert_svsbed_to_vcf(input, output):
     SV_del = dict()
     SV_ins = dict()
     
-    # for chrnum in chrnums:
-    #     if SV_del_temp[chrnum]: # if not empty
-    #         SV_del[chrnum] = merge_svs(SV_del_temp[chrnum])
-    #     if SV_ins_temp[chrnum]: # if not empty
-    #         SV_ins[chrnum] = merge_svs(SV_ins_temp[chrnum])
+    for chrnum in chrnums:
+        if SV_del_temp[chrnum]: # if not empty
+            SV_del[chrnum] = merge_svs(SV_del_temp[chrnum])
+        if SV_ins_temp[chrnum]: # if not empty
+            SV_ins[chrnum] = merge_svs(SV_ins_temp[chrnum])
 
-    # with open(output,'w') as outfile:
-    #     outfile.write(header)
-    #     for chrnum, sv_info in SV_del.items():
-    #         outfile.write(chrnum+"\t"+str(sv_info[0])+"\t.\tN\t<DEL>\t.\t.\tSVTYPE=DEL;END="+str(sv_info[1])+";SVLEN=-"+str(sv_info[2])+";SUPPORT="+str(sv_info[3])+"\tGT\t./.\n")
+    with open(output,'w') as outfile:
+        outfile.write(header)
+        for chrnum, svs in SV_del.items():
+            for sv_info in svs:
+                if sv_info[3]>support_thresh:
+                    outfile.write(chrnum+"\t"+str(sv_info[0])+"\t.\tN\t<DEL>\t.\t.\tSVTYPE=DEL;END="+str(sv_info[1])+";SVLEN=-"+str(sv_info[2])+";SUPPORT="+str(sv_info[3])+"\tGT\t./.\n")
 
-    #     for chrnum, sv_info in SV_ins.items():
-    #         outfile.write(chrnum+"\t"+str(sv_info[0])+"\t.\tN\t<INS>\t.\t.\tSVTYPE=INS;END="+str(sv_info[1])+";SVLEN="+str(sv_info[2])+";SUPPORT="+str(sv_info[3])+"\tGT\t./.\n")
+        for chrnum, svs in SV_ins.items():
+            for sv_info in svs:
+                if sv_info[3]>support_thresh:
+                    outfile.write(chrnum+"\t"+str(sv_info[0])+"\t.\tN\t<INS>\t.\t.\tSVTYPE=INS;END="+str(sv_info[1])+";SVLEN="+str(sv_info[2])+";SUPPORT="+str(sv_info[3])+"\tGT\t./.\n")
 
     
 
@@ -113,9 +121,11 @@ if __name__ == '__main__':
 
     parser.add_argument('--input', type=str,default="./NA24385_hg19_Pacbio_CCS_NGMLR_Smartie-sv.svs.bed")
     parser.add_argument('--output', type=str,default="./NA24385_hg19_Pacbio_CCS_NGMLR_Smartie-sv.svs.vcf")
+    parser.add_argument('--support_thresh', type=int,default=0)
     args = parser.parse_args()
 
     input = args.input
     output = args.output
+    support_thresh = args.support_thresh
 
-    convert_svsbed_to_vcf(input, output)
+    convert_svsbed_to_vcf(input, output, support_thresh)
