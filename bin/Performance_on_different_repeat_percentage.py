@@ -86,7 +86,32 @@ def perf_on_diff_rep_percent(tp,fp,fn,sv_caller,save_dir):
 
 
 
-perf_on_diff_rep_percent('Sniffles_NA24385_CCS_NGMLR_TP_repeat_persentage_info.txt',
-'Sniffles_NA24385_CCS_NGMLR_FP_repeat_persentage_info.txt',
-'Sniffles_NA24385_CCS_NGMLR_FN_repeat_persentage_info.txt',
-'Sniffles','.')
+# perf_on_diff_rep_percent('Sniffles_NA24385_CCS_NGMLR_TP_repeat_persentage_info.txt',
+# 'Sniffles_NA24385_CCS_NGMLR_FP_repeat_persentage_info.txt',
+# 'Sniffles_NA24385_CCS_NGMLR_FN_repeat_persentage_info.txt',
+# 'Sniffles','.')
+
+# perf_on_diff_rep_percent('Pacbio_CCS_cuteSV_INS_DEL_50_/cuteSV_NA24385_CCS_NGMLR_TP_repeat_persentage_info.txt',
+# 'Pacbio_CCS_cuteSV_INS_DEL_50_/cuteSV_NA24385_CCS_NGMLR_FP_repeat_persentage_info.txt',
+# 'Pacbio_CCS_cuteSV_INS_DEL_50_/cuteSV_NA24385_CCS_NGMLR_FN_repeat_persentage_info.txt',
+# 'cuteSV','Pacbio_CCS_cuteSV_INS_DEL_50_/')
+
+# perf_on_diff_rep_percent('Pacbio_CCS_SKSV_INS_DEL_50_/SKSV_NA24385_CCS_NGMLR_TP_repeat_persentage_info.txt',
+# 'Pacbio_CCS_SKSV_INS_DEL_50_/SKSV_NA24385_CCS_NGMLR_FP_repeat_persentage_info.txt',
+# 'Pacbio_CCS_SKSV_INS_DEL_50_/SKSV_NA24385_CCS_NGMLR_FN_repeat_persentage_info.txt',
+# 'SKSV','Pacbio_CCS_SKSV_INS_DEL_50_/')
+
+# perf_on_diff_rep_percent('Pacbio_CCS_pbsv_INS_DEL_50_/pbsv_NA24385_CCS_NGMLR_TP_repeat_persentage_info.txt',
+# 'Pacbio_CCS_pbsv_INS_DEL_50_/pbsv_NA24385_CCS_NGMLR_FP_repeat_persentage_info.txt',
+# 'Pacbio_CCS_pbsv_INS_DEL_50_/pbsv_NA24385_CCS_NGMLR_FN_repeat_persentage_info.txt',
+# 'pbsv','Pacbio_CCS_pbsv_INS_DEL_50_/')
+
+perf_on_diff_rep_percent('Nanopore_Promethion_cuteSV_INS_DEL_50_/cuteSV_NA24385_Nanopore_Prometion_minimap2_TP_repeat_persentage_info.txt',
+'Nanopore_Promethion_cuteSV_INS_DEL_50_/cuteSV_NA24385_Nanopore_Prometion_minimap2_FP_repeat_persentage_info.txt',
+'Nanopore_Promethion_cuteSV_INS_DEL_50_/cuteSV_NA24385_Nanopore_Prometion_minimap2_FN_repeat_persentage_info.txt',
+'cuteSV','Nanopore_Promethion_cuteSV_INS_DEL_50_/')
+
+perf_on_diff_rep_percent('Nanopore_Promethion_Sniffles_INS_DEL_50_/Sniffles_NA24385_Nanopore_Prometion_minimap2_TP_repeat_persentage_info.txt',
+'Nanopore_Promethion_Sniffles_INS_DEL_50_/Sniffles_NA24385_Nanopore_Prometion_minimap2_FP_repeat_persentage_info.txt',
+'Nanopore_Promethion_Sniffles_INS_DEL_50_/Sniffles_NA24385_Nanopore_Prometion_minimap2_FN_repeat_persentage_info.txt',
+'Sniffles','Nanopore_Promethion_Sniffles_INS_DEL_50_/')

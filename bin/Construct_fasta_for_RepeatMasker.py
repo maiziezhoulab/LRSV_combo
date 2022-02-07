@@ -33,13 +33,33 @@ def construct_fasta_RepeatMasker(vcf,sample,sv_caller,out_dir):
                         sinfo[str(sv_index)+'_SV'] = [sv_caller,sample,chrnum,'INS',start,svlen]
                         sv_index+=1
     
-    pickle.dump(sinfo,open('./'+sv_caller+'_'+sample+'_sequence_info.pkl',"wb"))
+    pickle.dump(sinfo,open(out_dir+'/'+sv_caller+'_'+sample+'_sequence_info.pkl',"wb"))
 
 
 #construct_fasta_RepeatMasker('pbsv_NA24385_NGMLR.vcf','NA24385_CCS_NGMLR','pbsv','.')
 #construct_fasta_RepeatMasker('Sniffles_NA24385_NGMLR.vcf','NA24385_CCS_NGMLR','Sniffles','.')
 #construct_fasta_RepeatMasker('SKSV_NA24385_Pacbio_CCS.vcf','NA24385_CCS','SKSV','.')
 
-construct_fasta_RepeatMasker('Sniffles_INS_DEL_50_/fn.vcf','NA24385_CCS_NGMLR_FN','Sniffles','.')
-construct_fasta_RepeatMasker('Sniffles_INS_DEL_50_/fp.vcf','NA24385_CCS_NGMLR_FP','Sniffles','.')
-construct_fasta_RepeatMasker('Sniffles_INS_DEL_50_/tp-call.vcf','NA24385_CCS_NGMLR_TP','Sniffles','.')
+# construct_fasta_RepeatMasker('Pacbio_CCS_Sniffles_INS_DEL_50_/fn.vcf','NA24385_CCS_NGMLR_FN','Sniffles','./Pacbio_CCS_Sniffles_INS_DEL_50_/')
+# construct_fasta_RepeatMasker('Pacbio_CCS_Sniffles_INS_DEL_50_/fp.vcf','NA24385_CCS_NGMLR_FP','Sniffles','./Pacbio_CCS_Sniffles_INS_DEL_50_/')
+# construct_fasta_RepeatMasker('Pacbio_CCS_Sniffles_INS_DEL_50_/tp-call.vcf','NA24385_CCS_NGMLR_TP','Sniffles','./Pacbio_CCS_Sniffles_INS_DEL_50_/')
+
+# construct_fasta_RepeatMasker('Pacbio_CCS_cuteSV_INS_DEL_50_/fn.vcf','NA24385_CCS_NGMLR_FN','cuteSV','./Pacbio_CCS_cuteSV_INS_DEL_50_/')
+# construct_fasta_RepeatMasker('Pacbio_CCS_cuteSV_INS_DEL_50_/fp.vcf','NA24385_CCS_NGMLR_FP','cuteSV','./Pacbio_CCS_cuteSV_INS_DEL_50_/')
+# construct_fasta_RepeatMasker('Pacbio_CCS_cuteSV_INS_DEL_50_/tp-call.vcf','NA24385_CCS_NGMLR_TP','cuteSV','./Pacbio_CCS_cuteSV_INS_DEL_50_/')
+
+# construct_fasta_RepeatMasker('Pacbio_CCS_SKSV_INS_DEL_50_/fn.vcf','NA24385_CCS_NGMLR_FN','SKSV','./Pacbio_CCS_SKSV_INS_DEL_50_/')
+# construct_fasta_RepeatMasker('Pacbio_CCS_SKSV_INS_DEL_50_/fp.vcf','NA24385_CCS_NGMLR_FP','SKSV','./Pacbio_CCS_SKSV_INS_DEL_50_/')
+# construct_fasta_RepeatMasker('Pacbio_CCS_SKSV_INS_DEL_50_/tp-call.vcf','NA24385_CCS_NGMLR_TP','SKSV','./Pacbio_CCS_SKSV_INS_DEL_50_/')
+
+# construct_fasta_RepeatMasker('Pacbio_CCS_pbsv_INS_DEL_50_/fn.vcf','NA24385_CCS_NGMLR_FN','pbsv','./Pacbio_CCS_pbsv_INS_DEL_50_/')
+# construct_fasta_RepeatMasker('Pacbio_CCS_pbsv_INS_DEL_50_/fp.vcf','NA24385_CCS_NGMLR_FP','pbsv','./Pacbio_CCS_pbsv_INS_DEL_50_/')
+# construct_fasta_RepeatMasker('Pacbio_CCS_pbsv_INS_DEL_50_/tp-call.vcf','NA24385_CCS_NGMLR_TP','pbsv','./Pacbio_CCS_pbsv_INS_DEL_50_/')
+
+construct_fasta_RepeatMasker('Nanopore_Promethion_cuteSV_INS_DEL_50_/fn.vcf','NA24385_Nanopore_Prometion_minimap2_FN','cuteSV','./Nanopore_Promethion_cuteSV_INS_DEL_50_/')
+construct_fasta_RepeatMasker('Nanopore_Promethion_cuteSV_INS_DEL_50_/fp.vcf','NA24385_Nanopore_Prometion_minimap2_FP','cuteSV','./Nanopore_Promethion_cuteSV_INS_DEL_50_/')
+construct_fasta_RepeatMasker('Nanopore_Promethion_cuteSV_INS_DEL_50_/tp-call.vcf','NA24385_Nanopore_Prometion_minimap2_TP','cuteSV','./Nanopore_Promethion_cuteSV_INS_DEL_50_/')
+
+construct_fasta_RepeatMasker('Nanopore_Promethion_Sniffles_INS_DEL_50_/fn.vcf','NA24385_Nanopore_Prometion_minimap2_FN','Sniffles','./Nanopore_Promethion_Sniffles_INS_DEL_50_/')
+construct_fasta_RepeatMasker('Nanopore_Promethion_Sniffles_INS_DEL_50_/fp.vcf','NA24385_Nanopore_Prometion_minimap2_FP','Sniffles','./Nanopore_Promethion_Sniffles_INS_DEL_50_/')
+construct_fasta_RepeatMasker('Nanopore_Promethion_Sniffles_INS_DEL_50_/tp-call.vcf','NA24385_Nanopore_Prometion_minimap2_TP','Sniffles','./Nanopore_Promethion_Sniffles_INS_DEL_50_/')
