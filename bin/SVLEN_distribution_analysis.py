@@ -64,8 +64,10 @@ def svlen_distribution_analysis(vlf,out_dir):
                             break
 
         for key,value in temp_store.items():
-            svlen50_1k[key]=dict()
-            svlen1k_10k[key]=dict()
+            if key not in svlen50_1k:
+                svlen50_1k[key]=dict()
+            if key not in svlen1k_10k:
+                svlen1k_10k[key]=dict()
             svlen50_1k[key]['Intervals'] = ['[50,200)','[200,400)','[400,600)','[600,800)','[800,1k)']
             svlen1k_10k[key]['Intervals'] = ['[1k,2.5k)','[2.5k,5k)','[5k,7.5k)','[7.5k,10k)','[10k,inf)']
             svlen50_1k[key][sv_caller] = value[:len(svlen50_1k[key]['Intervals'])]
