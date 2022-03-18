@@ -123,9 +123,21 @@ def vcf_regularization(vlf,out_dir,output_reg_vcfs=True):
                         format_field = fields[8].split(':')
                         sample_field = fields[9].split(':')
 
-                        svtype = re.findall("SVTYPE=(\w+)",line)[0]
-                        svlen  = re.findall("SVLEN=(-?\d+)",line)[0]
-                        end    = re.findall("END=(\d+)",line)[0]
+                        try:
+                            svtype = re.findall("SVTYPE=(\w+)",line)[0]
+                            svlen  = re.findall("SVLEN=(-?\d+)",line)[0]
+                            end    = re.findall("END=(\d+)",line)[0]
+                        except:
+                            if len(fields[3])-len(fields[3]) > 0:
+                                svtype = 'DEL'
+                            elif len(fields[3])-len(fields[3]) < 0:
+                                svtype = 'INS'
+                            svlen = abs(len(fields[3])-len(fields[3]))
+                            if svtype == 'DEL':
+                                end = str(int(fields[1])+svlen)
+                            else:
+                                end = fields[1]
+                            svlen = str(svlen)
                         genotype = sample_field[format_field.index('GT')]
 
                         if field_index==7:
