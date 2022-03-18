@@ -128,11 +128,11 @@ def vcf_regularization(vlf,out_dir,output_reg_vcfs=True):
                             svlen  = re.findall("SVLEN=(-?\d+)",line)[0]
                             end    = re.findall("END=(\d+)",line)[0]
                         except:
-                            if len(fields[3])-len(fields[3]) > 0:
+                            if len(fields[3])-len(fields[4]) > 0:
                                 svtype = 'DEL'
-                            elif len(fields[3])-len(fields[3]) < 0:
+                            elif len(fields[3])-len(fields[4]) < 0:
                                 svtype = 'INS'
-                            svlen = abs(len(fields[3])-len(fields[3]))
+                            svlen = abs(len(fields[3])-len(fields[4]))
                             if svtype == 'DEL':
                                 end = str(int(fields[1])+svlen)
                             else:
