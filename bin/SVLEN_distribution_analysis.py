@@ -43,8 +43,17 @@ def svlen_distribution_analysis(vlf,out_dir):
         with open(vcf_file,'r') as vf:
             for line in vf:
                 if line[0] != '#':
-                    svtype = re.findall("SVTYPE=(\w+)",line)[0]
-                    svlen = float(re.findall("SVLEN=-?(\d+)",line)[0])
+                    try:
+                        svtype = re.findall("SVTYPE=(\w+)",line)[0]
+                        svlen = float(re.findall("SVLEN=-?(\d+)",line)[0])
+                    except:
+                        fields = line.rstrip('\n').split('\t')
+                        if len(fields[3])-len(fields[4]) > 0:
+                            svtype = 'DEL'
+                        elif len(fields[3])-len(fields[4]) < 0:
+                            svtype = 'INS'
+                        svlen = abs(len(fields[3])-len(fields[4]))
+                        svlen = float(svlen)
 
                     if svtype not in temp_store:
                         temp_store[svtype] = [0]*len(Intervals)
