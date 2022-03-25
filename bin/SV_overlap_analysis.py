@@ -249,7 +249,7 @@ def plot_overlap_by_callers(vcf_file,save_dir,sv_types=['ALL','DEL','INS']):
     with open(vcf_file,'r') as vcf:
         for line in vcf:
             if '##source=' in line:
-                all_sv_callers = line.rstrip('\n').lstrip('##source=').split('/')
+                all_sv_callers = line.rstrip('\n')[9:].split('/')
                 all_sv_callers.reverse()
                 total_sv_caller_num = len(all_sv_callers)
                 break
