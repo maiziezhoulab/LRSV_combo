@@ -86,10 +86,10 @@ def perf_on_diff_rep_percent(tp,fp,fn,sv_caller,save_dir):
 
 
 
-# perf_on_diff_rep_percent('Sniffles_NA24385_CCS_NGMLR_TP_repeat_persentage_info.txt',
-# 'Sniffles_NA24385_CCS_NGMLR_FP_repeat_persentage_info.txt',
-# 'Sniffles_NA24385_CCS_NGMLR_FN_repeat_persentage_info.txt',
-# 'Sniffles','.')
+# perf_on_diff_rep_percent('Pacbio_CCS_Sniffles_INS_DEL_50_/Sniffles_NA24385_CCS_NGMLR_TP_repeat_persentage_info.txt',
+# 'Pacbio_CCS_Sniffles_INS_DEL_50_/Sniffles_NA24385_CCS_NGMLR_FP_repeat_persentage_info.txt',
+# 'Pacbio_CCS_Sniffles_INS_DEL_50_/Sniffles_NA24385_CCS_NGMLR_FN_repeat_persentage_info.txt',
+# 'Sniffles','Pacbio_CCS_Sniffles_INS_DEL_50_/')
 
 # perf_on_diff_rep_percent('Pacbio_CCS_cuteSV_INS_DEL_50_/cuteSV_NA24385_CCS_NGMLR_TP_repeat_persentage_info.txt',
 # 'Pacbio_CCS_cuteSV_INS_DEL_50_/cuteSV_NA24385_CCS_NGMLR_FP_repeat_persentage_info.txt',

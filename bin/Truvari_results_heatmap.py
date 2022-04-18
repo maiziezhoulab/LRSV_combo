@@ -50,27 +50,28 @@ def heatmap_truvari_results_parser(truvari_results_dir,data_key="f1"): #data_key
     args[config[0]] = sorted(set(args[config[0]]),key=lambda x: float(x))
     args[config[2]] = sorted(set(args[config[2]]),key=lambda x: float(x))
 
-    if len(args) > 2:
-        raise ValueError("Found more than two arguments")
-
     heat_map_data = dict()
     
     for config_dir in Truvari_config_list:
         SV_dirs = [i for i in os.listdir(truvari_results_dir+'/'+config_dir) if os.path.isdir(truvari_results_dir+'/'+config_dir+'/'+i)]
 
         config = config_dir.split('_')
+        arg_pair = (config[0],config[2])
         arg1_index = args[config[0]].index(config[1])
         arg2_index = args[config[2]].index(config[3])
 
         for SV_dir in SV_dirs:
             if SV_dir not in heat_map_data:
-                heat_map_data[SV_dir] = np.zeros((len(args[config[0]]),len(args[config[2]])))
+                heat_map_data[SV_dir] = dict()
+            if arg_pair not in heat_map_data[SV_dir]:
+                heat_map_data[SV_dir][arg_pair] = np.zeros((len(args[config[0]]),len(args[config[2]])))
+                #heat_map_data[SV_dir] = np.zeros((len(args[config[0]]),len(args[config[2]])))
 
             summary_dict = read_truvari_summary(truvari_results_dir+'/'+config_dir+'/'+SV_dir+'/summary.txt')
             if summary_dict[data_key] == 'NaN':
                 summary_dict[data_key] = 0
 
-            heat_map_data[SV_dir][arg1_index,arg2_index] = float(summary_dict[data_key])
+            heat_map_data[SV_dir][arg_pair][arg1_index,arg2_index] = float(summary_dict[data_key])
 
     return args, heat_map_data
     #plot_heatmap(heat_map_data,truvari_results_dir,data_key,args[config[2]],args[config[0]])
@@ -88,38 +89,40 @@ def truvari_results_heatmap(tools_truvari_list, save_dir, data_key="f1"):
                 args, heat_map_data = heatmap_truvari_results_parser(line[1],data_key=data_key)
                 for sv_type in heat_map_data.keys():
                     if sv_type not in heat_map_info:
-                        heat_map_info[sv_type] = list()
-                    heat_map_info[sv_type].append([line[0], args, heat_map_data[sv_type]])
+                        heat_map_info[sv_type] = dict()
+                    for arg_pair in heat_map_data[sv_type].keys():
+                        if arg_pair not in heat_map_info[sv_type]:
+                            heat_map_info[sv_type][arg_pair] = list()
+                        heat_map_info[sv_type][arg_pair].append([line[0], args, heat_map_data[sv_type][arg_pair]])
 
     col_hm = math.ceil(tool_num**0.5) 
     col = col_hm+1 #additional axis for colorbar
     row = math.ceil(tool_num/col_hm)
 
     for sv_type in heat_map_info.keys():
-        fig, axes = plt.subplots(row,col,figsize=(col_hm*10+3,row*10),gridspec_kw={'width_ratios': [10]*col_hm+[0.5]})
-        mpl.rcParams['pdf.fonttype'] = 42
-        for i, hm_info in enumerate(heat_map_info[sv_type]):
-            ax_row = i//col_hm
-            ax_col = i%col_hm
-            if ax_col == col_hm-1:
-                sns.heatmap(hm_info[-1], annot=True, ax=axes[ax_row][ax_col],cmap="rainbow",vmin=0, vmax=1,fmt='.3f',cbar=True,cbar_ax=axes[ax_row][ax_col+1])
-            else:
-                sns.heatmap(hm_info[-1], annot=True, ax=axes[ax_row][ax_col],cmap="rainbow",vmin=0, vmax=1,fmt='.3f',cbar=False,)
+        for arg_pair in heat_map_info[sv_type].keys():
+            fig, axes = plt.subplots(row,col,figsize=(col_hm*10+3,row*10),gridspec_kw={'width_ratios': [10]*col_hm+[0.5]})
+            mpl.rcParams['pdf.fonttype'] = 42
+            for i, hm_info in enumerate(heat_map_info[sv_type][arg_pair]):
+                ax_row = i//col_hm
+                ax_col = i%col_hm
+                if ax_col == col_hm-1:
+                    sns.heatmap(hm_info[-1], annot=True, ax=axes[ax_row][ax_col],cmap="rainbow",vmin=0, vmax=1,fmt='.3f',cbar=True,cbar_ax=axes[ax_row][ax_col+1])
+                else:
+                    sns.heatmap(hm_info[-1], annot=True, ax=axes[ax_row][ax_col],cmap="rainbow",vmin=0, vmax=1,fmt='.3f',cbar=False,)
 
+                axes[ax_row][ax_col].set_xlabel(arg_pair[1])
+                axes[ax_row][ax_col].set_ylabel(arg_pair[0],rotation=0)
+                axes[ax_row][ax_col].set_xticklabels(hm_info[1][arg_pair[1]])
+                axes[ax_row][ax_col].set_yticklabels(hm_info[1][arg_pair[0]],rotation=0)
 
-            labels = list(hm_info[1].keys())
-            axes[ax_row][ax_col].set_xlabel(labels[1])
-            axes[ax_row][ax_col].set_ylabel(labels[0],rotation=0)
-            axes[ax_row][ax_col].set_xticklabels(hm_info[1][labels[1]])
-            axes[ax_row][ax_col].set_yticklabels(hm_info[1][labels[0]])
+                axes[ax_row][ax_col].set_title(hm_info[0])
 
-            axes[ax_row][ax_col].set_title(hm_info[0])
+                #plt.yticks(rotation=0)
 
-            plt.yticks(rotation=0)
-
-        plt.suptitle(sv_type+' '+data_key,y=0.95)
-        plt.savefig(save_dir+'/'+sv_type+data_key+'_truvari_heatmap.pdf',bbox_inches='tight')
-        plt.close()
+            plt.suptitle(sv_type+' '+data_key+' '+str(arg_pair),y=0.95)
+            plt.savefig(save_dir+'/'+sv_type+data_key+str(arg_pair)+'_truvari_heatmap.pdf',bbox_inches='tight')
+            plt.close()
 
 
 

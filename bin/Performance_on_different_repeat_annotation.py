@@ -51,7 +51,7 @@ def plot_perf_on_diff_rep_anno(result_df,tpfpfn_dict,lenth_distrb_dict,sv_caller
     plt.savefig(save_dir+'/'+sv_caller+'_performance_on_different_repeat_annotation.pdf',bbox_inches='tight')
     plt.close(fig)
 
-def perf_on_diff_rep_anno(tp,fp,fn,sv_caller,save_dir,include_None_anno=True,topk=12):
+def perf_on_diff_rep_anno(tp,fp,fn,sv_caller,save_dir,include_None_anno=True,topk=5):
     temp_annot_dict = dict()
     for file_name in [tp,fp,fn]:
         with open(file_name,'r') as f:
@@ -102,25 +102,25 @@ def perf_on_diff_rep_anno(tp,fp,fn,sv_caller,save_dir,include_None_anno=True,top
     plot_perf_on_diff_rep_anno(result_df,tpfpfn_dict,lenth_distrb_dict,sv_caller,save_dir,topk)
 
 
-# perf_on_diff_rep_anno('Sniffles_NA24385_CCS_NGMLR_TP_repeat_persentage_info.txt',
-# 'Sniffles_NA24385_CCS_NGMLR_FP_repeat_persentage_info.txt',
-# 'Sniffles_NA24385_CCS_NGMLR_FN_repeat_persentage_info.txt',
-# 'Sniffles','.')
+perf_on_diff_rep_anno('Pacbio_CCS_Sniffles_INS_DEL_50_/Sniffles_NA24385_CCS_NGMLR_TP_repeat_persentage_info.txt',
+'Pacbio_CCS_Sniffles_INS_DEL_50_/Sniffles_NA24385_CCS_NGMLR_FP_repeat_persentage_info.txt',
+'Pacbio_CCS_Sniffles_INS_DEL_50_/Sniffles_NA24385_CCS_NGMLR_FN_repeat_persentage_info.txt',
+'Sniffles','Pacbio_CCS_Sniffles_INS_DEL_50_/')
 
-# perf_on_diff_rep_anno('Pacbio_CCS_cuteSV_INS_DEL_50_/cuteSV_NA24385_CCS_NGMLR_TP_repeat_persentage_info.txt',
-# 'Pacbio_CCS_cuteSV_INS_DEL_50_/cuteSV_NA24385_CCS_NGMLR_FP_repeat_persentage_info.txt',
-# 'Pacbio_CCS_cuteSV_INS_DEL_50_/cuteSV_NA24385_CCS_NGMLR_FN_repeat_persentage_info.txt',
-# 'cuteSV','Pacbio_CCS_cuteSV_INS_DEL_50_/')
+perf_on_diff_rep_anno('Pacbio_CCS_cuteSV_INS_DEL_50_/cuteSV_NA24385_CCS_NGMLR_TP_repeat_persentage_info.txt',
+'Pacbio_CCS_cuteSV_INS_DEL_50_/cuteSV_NA24385_CCS_NGMLR_FP_repeat_persentage_info.txt',
+'Pacbio_CCS_cuteSV_INS_DEL_50_/cuteSV_NA24385_CCS_NGMLR_FN_repeat_persentage_info.txt',
+'cuteSV','Pacbio_CCS_cuteSV_INS_DEL_50_/')
 
-# perf_on_diff_rep_anno('Pacbio_CCS_SKSV_INS_DEL_50_/SKSV_NA24385_CCS_NGMLR_TP_repeat_persentage_info.txt',
-# 'Pacbio_CCS_SKSV_INS_DEL_50_/SKSV_NA24385_CCS_NGMLR_FP_repeat_persentage_info.txt',
-# 'Pacbio_CCS_SKSV_INS_DEL_50_/SKSV_NA24385_CCS_NGMLR_FN_repeat_persentage_info.txt',
-# 'SKSV','Pacbio_CCS_SKSV_INS_DEL_50_/')
+perf_on_diff_rep_anno('Pacbio_CCS_SKSV_INS_DEL_50_/SKSV_NA24385_CCS_NGMLR_TP_repeat_persentage_info.txt',
+'Pacbio_CCS_SKSV_INS_DEL_50_/SKSV_NA24385_CCS_NGMLR_FP_repeat_persentage_info.txt',
+'Pacbio_CCS_SKSV_INS_DEL_50_/SKSV_NA24385_CCS_NGMLR_FN_repeat_persentage_info.txt',
+'SKSV','Pacbio_CCS_SKSV_INS_DEL_50_/')
 
-# perf_on_diff_rep_anno('Pacbio_CCS_pbsv_INS_DEL_50_/pbsv_NA24385_CCS_NGMLR_TP_repeat_persentage_info.txt',
-# 'Pacbio_CCS_pbsv_INS_DEL_50_/pbsv_NA24385_CCS_NGMLR_FP_repeat_persentage_info.txt',
-# 'Pacbio_CCS_pbsv_INS_DEL_50_/pbsv_NA24385_CCS_NGMLR_FN_repeat_persentage_info.txt',
-# 'pbsv','Pacbio_CCS_pbsv_INS_DEL_50_/')
+perf_on_diff_rep_anno('Pacbio_CCS_pbsv_INS_DEL_50_/pbsv_NA24385_CCS_NGMLR_TP_repeat_persentage_info.txt',
+'Pacbio_CCS_pbsv_INS_DEL_50_/pbsv_NA24385_CCS_NGMLR_FP_repeat_persentage_info.txt',
+'Pacbio_CCS_pbsv_INS_DEL_50_/pbsv_NA24385_CCS_NGMLR_FN_repeat_persentage_info.txt',
+'pbsv','Pacbio_CCS_pbsv_INS_DEL_50_/')
 
 perf_on_diff_rep_anno('Nanopore_Promethion_cuteSV_INS_DEL_50_/cuteSV_NA24385_Nanopore_Prometion_minimap2_TP_repeat_persentage_info.txt',
 'Nanopore_Promethion_cuteSV_INS_DEL_50_/cuteSV_NA24385_Nanopore_Prometion_minimap2_FP_repeat_persentage_info.txt',

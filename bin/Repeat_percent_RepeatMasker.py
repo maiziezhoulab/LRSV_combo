@@ -67,11 +67,9 @@ def process_repeatmasker_results(RM_input,sequence_info_file,out_dir):
                 percenf.write('%.1f%%\t%s\n'%(perc,anno))
 
 
-#process_repeatmasker_results('./RM2_Sniffles_NA24385_CCS_NGMLR.fasta_1642020574.out','./Sniffles_NA24385_CCS_NGMLR_sequence_info.pkl','.')
-
-# process_repeatmasker_results('./RM2_Sniffles_NA24385_CCS_NGMLR_FN.fasta_1642415126.out','./Sniffles_NA24385_CCS_NGMLR_FN_sequence_info.pkl','.')
-# process_repeatmasker_results('./RM2_Sniffles_NA24385_CCS_NGMLR_FP.fasta_1642415173.out','./Sniffles_NA24385_CCS_NGMLR_FP_sequence_info.pkl','.')
-# process_repeatmasker_results('./RM2_Sniffles_NA24385_CCS_NGMLR_TP.fasta_1642415280.out','./Sniffles_NA24385_CCS_NGMLR_TP_sequence_info.pkl','.')
+# process_repeatmasker_results('Pacbio_CCS_Sniffles_INS_DEL_50_/RM2_Sniffles_NA24385_CCS_NGMLR_FN.fasta_1642415126.out','Pacbio_CCS_Sniffles_INS_DEL_50_/Sniffles_NA24385_CCS_NGMLR_FN_sequence_info.pkl','Pacbio_CCS_Sniffles_INS_DEL_50_')
+# process_repeatmasker_results('Pacbio_CCS_Sniffles_INS_DEL_50_/RM2_Sniffles_NA24385_CCS_NGMLR_FP.fasta_1642415173.out','Pacbio_CCS_Sniffles_INS_DEL_50_/Sniffles_NA24385_CCS_NGMLR_FP_sequence_info.pkl','Pacbio_CCS_Sniffles_INS_DEL_50_')
+# process_repeatmasker_results('Pacbio_CCS_Sniffles_INS_DEL_50_/RM2_Sniffles_NA24385_CCS_NGMLR_TP.fasta_1642415280.out','Pacbio_CCS_Sniffles_INS_DEL_50_/Sniffles_NA24385_CCS_NGMLR_TP_sequence_info.pkl','Pacbio_CCS_Sniffles_INS_DEL_50_')
 
 # process_repeatmasker_results('Pacbio_CCS_cuteSV_INS_DEL_50_/RM2_cuteSV_NA24385_CCS_NGMLR_FN.fasta.out','Pacbio_CCS_cuteSV_INS_DEL_50_/cuteSV_NA24385_CCS_NGMLR_FN_sequence_info.pkl','Pacbio_CCS_cuteSV_INS_DEL_50_/')
 # process_repeatmasker_results('Pacbio_CCS_cuteSV_INS_DEL_50_/RM2_cuteSV_NA24385_CCS_NGMLR_FP.fasta.out','Pacbio_CCS_cuteSV_INS_DEL_50_/cuteSV_NA24385_CCS_NGMLR_FP_sequence_info.pkl','Pacbio_CCS_cuteSV_INS_DEL_50_/')
