@@ -17,14 +17,16 @@ def radar_plot(sv_caller, perf_on_aligners, save_dir):
     axis.set_theta_zero_location('N')
     axis.set_theta_direction(-1)
         
-    axis.set_yticks([])
-    axis.set_xticks(['DEL-Recall','DEL-Precision','INS-Recall','INS-Precision'])
+    #axis.set_yticks([])
     axis.set_rlim(0,1)
 
     theta = np.arange(0, 2 * np.pi + 0.00000001, np.pi / 2)
+    axis.set_xticks(theta)
+    axis.set_xticklabels(['DEL-Recall','DEL-Precision','INS-Recall','INS-Precision',''])
+
 
     for aligner_perf in perf_on_aligners:
-        axis.plot(theta,aligner_perf[1],label=aligner_perf[0])
+        axis.plot(theta,aligner_perf[1]+[aligner_perf[1][0]],label=aligner_perf[0])
 
     title = sv_caller
     plt.suptitle(title)
