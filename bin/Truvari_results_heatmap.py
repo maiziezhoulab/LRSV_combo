@@ -47,8 +47,12 @@ def heatmap_truvari_results_parser(truvari_results_dir,data_key="f1"): #data_key
         args[config[0]].append(config[1])
         args[config[2]].append(config[3])
 
-    args[config[0]] = sorted(set(args[config[0]]),key=lambda x: float(x))
-    args[config[2]] = sorted(set(args[config[2]]),key=lambda x: float(x))
+
+    #args[config[0]] = sorted(set(args[config[0]]),key=lambda x: float(x))
+    #args[config[2]] = sorted(set(args[config[2]]),key=lambda x: float(x))
+
+    for key, value in args.items():
+        args[key] = sorted(set(value),key=lambda x: float(x))
 
     heat_map_data = dict()
     
@@ -118,7 +122,7 @@ def truvari_results_heatmap(tools_truvari_list, save_dir, data_key="f1"):
 
                 axes[ax_row][ax_col].set_title(hm_info[0])
 
-                #plt.yticks(rotation=0)
+                #plt.yticks(rotation=90)
 
             plt.suptitle(sv_type+' '+data_key+' '+str(arg_pair),y=0.95)
             plt.savefig(save_dir+'/'+sv_type+data_key+str(arg_pair)+'_truvari_heatmap.pdf',bbox_inches='tight')
@@ -142,3 +146,4 @@ if __name__ == '__main__':
     save_dir = args.save_dir
 
     truvari_results_heatmap(tools_truvari_list, save_dir, data_key=data_type)
+
