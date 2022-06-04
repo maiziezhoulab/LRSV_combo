@@ -1,5 +1,6 @@
 import os
 import numpy as np
+import pickle
 
 # plot heatmap #
 import matplotlib
@@ -98,6 +99,9 @@ def truvari_results_heatmap(tools_truvari_list, save_dir, data_key="f1"):
                         if arg_pair not in heat_map_info[sv_type]:
                             heat_map_info[sv_type][arg_pair] = list()
                         heat_map_info[sv_type][arg_pair].append([line[0], args, heat_map_data[sv_type][arg_pair]])
+
+    with open(save_dir+'/heatmap_data.pkl','wb') as hmpk:
+        pickle.dump(heat_map_info,hmpk)
 
     col_hm = math.ceil(tool_num**0.5) 
     col = col_hm+1 #additional axis for colorbar
