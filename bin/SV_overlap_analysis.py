@@ -58,7 +58,7 @@ header_infofield='''##INFO=<ID=SVTYPE,Number=1,Type=String,Description="Type of 
 #CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tSample
 '''
 
-def vcf_regularization(vlf,out_dir,output_reg_vcfs=True):
+def vcf_regularization(vlf,out_dir,keep_refalt_seq=False,output_reg_vcfs=True):
 
     if not os.path.isdir(out_dir):
         os.mkdir(out_dir)
@@ -153,10 +153,17 @@ def vcf_regularization(vlf,out_dir,output_reg_vcfs=True):
                             elif info_type=='count':
                                 support = str(len(support_))
 
-                        if SR_Tag is not None:
-                            new_line = fields[0]+'\t'+fields[1]+'\t'+fields[2]+'\tN\t<'+svtype+'>\t'+fields[5]+'\t'+fields[6]+'\t'+'SVTYPE='+svtype+';END='+end+';SVLEN='+svlen+';SUPPORT='+support+';SC='+sv_caller+'\tGT\t'+genotype+'\n'
+                        if keep_refalt_seq:
+                            ref_seq=fields[3]
+                            alt_seq=fields[4]
                         else:
-                            new_line = fields[0]+'\t'+fields[1]+'\t'+fields[2]+'\tN\t<'+svtype+'>\t'+fields[5]+'\t'+fields[6]+'\t'+'SVTYPE='+svtype+';END='+end+';SVLEN='+svlen+';SC='+sv_caller+'\tGT\t'+genotype+'\n'
+                            ref_seq='N'
+                            alt_seq='<'+svtype+'>'
+                        
+                        if SR_Tag is not None:
+                            new_line = fields[0]+'\t'+fields[1]+'\t'+fields[2]+'\t'+ref_seq+'\t'+alt_seq+'\t'+fields[5]+'\t'+fields[6]+'\t'+'SVTYPE='+svtype+';END='+end+';SVLEN='+svlen+';SUPPORT='+support+';SC='+sv_caller+'\tGT\t'+genotype+'\n'
+                        else:
+                            new_line = fields[0]+'\t'+fields[1]+'\t'+fields[2]+'\t'+ref_seq+'\t'+alt_seq+'\t'+fields[5]+'\t'+fields[6]+'\t'+'SVTYPE='+svtype+';END='+end+';SVLEN='+svlen+';SC='+sv_caller+'\tGT\t'+genotype+'\n'
                         new_vcf.write(new_line)
 
     if output_reg_vcfs:
@@ -300,13 +307,15 @@ if __name__ == "__main__":
     parser.add_argument('--vcf_list_file','-vlf',)
     parser.add_argument('--truvari_config_file','-tcf',)
     parser.add_argument('--out_dir','-o_dir')
+    parser.add_argument('--keep_refalt_seq','-kpseq',action='store_true')
 
     args = parser.parse_args()
 
     vlf = args.vcf_list_file
     tcf = args.truvari_config_file
     out_dir = args.out_dir
+    keep_refalt_seq = args.keep_refalt_seq
 
-    reg_vcfs = vcf_regularization(vlf,out_dir)
+    reg_vcfs = vcf_regularization(vlf,out_dir,keep_refalt_seq=keep_refalt_seq)
     merged_vcf = truvari_overlap(reg_vcfs,out_dir,tcf)
     plot_overlap_by_callers(merged_vcf,out_dir,sv_types=['ALL','DEL','INS'])
