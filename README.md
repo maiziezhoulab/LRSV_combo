@@ -71,7 +71,28 @@ try again with a newer version of gcc. Here we use GCC/10.2.0
 
 ## cuteSV
 ### Project Links
+#### Github Repo:
+https://github.com/tjiangHIT/cuteSV
+#### Publication:
+https://doi.org/10.1186/s13059-020-02107-y
 ### Installation & Dependencies
+#### Installation
+```
+$ pip install cuteSV
+or
+$ conda install -c bioconda cutesv
+or 
+$ git clone https://github.com/tjiangHIT/cuteSV.git && cd cuteSV/ && python setup.py install 
+```
+#### Dependencies
+```
+python3
+pysam
+Biopython
+cigar
+numpy
+pyvcf
+```
 ### Inputs & Outputs
 ### Commands used
 ### Other notes
