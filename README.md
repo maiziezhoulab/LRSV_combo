@@ -3,7 +3,7 @@
 # Table of contents
 - [Datasets](#Datasets)
   - [Pacbio](#Pacbio)
-  - [Oxford Nanopore Technologies](#Oxford-Nanopore-Technologies)
+  - [Oxford Nanopore Technologies](#Oxford%20Nanopore%20Technologies)
 - [Alignment Based SV Callers](#Alignment-Based-SV-Callers)
   - [SKSV](#SKSV)
   - [cuteSV](#cuteSV)
