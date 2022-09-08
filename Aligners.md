@@ -1,10 +1,10 @@
 # Table of contents
-- [NGMLR(2018)](#NGMLR2018)
-- [minimp2(2018)](#minimap22018)
-- [Winnowmap(2020)](#Winnowmap2020)
-- [LRA(2021)](#LRA2021)
+- [NGMLR (2018)](#NGMLR-2018)
+- [minimp2 (2018)](#minimap2-2018)
+- [Winnowmap (2020)](#Winnowmap-2020)
+- [LRA (2021)](#LRA-2021)
 
-# NGMLR(2018)
+# NGMLR (2018)
 ## Project Links
 ### Github Repo:
 https://github.com/philres/ngmlr
@@ -77,7 +77,7 @@ samtools index ${outname}.sorted.bam
 ## Other notes
 See **NOTE**s above
 
-# minimap2(2018)
+# minimap2 (2018)
 ## Project Links
 ### Github Repo:
 https://github.com/lh3/minimap2
@@ -152,7 +152,7 @@ samtools index ${output_name}.bam
 ## Other notes
 1. minimap2 does not generate MD tags by default, use `--MD` to enable that function
 2. minimap2 provides many preset choices, check with `minimap2 --help`
-# Winnowmap(2020)
+# Winnowmap (2020)
 ## Project Links
 ### Github Repo:
 https://github.com/marbl/Winnowmap
@@ -218,7 +218,7 @@ samtools index ${outname}.bam
 2. Winnowmap provides many preset choices, check with `winnowmap --help`. Please note that these preset names are slightly different from minimap2
 3. Winnowmap does not generate MD tags by default, use `--MD` to enable that function
 
-# LRA(2021)
+# LRA (2021)
 ## Project Links
 ### Github Repo:
 https://github.com/ChaissonLab/LRA
