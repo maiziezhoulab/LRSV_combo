@@ -1,8 +1,8 @@
 # Table of contents
-- [NGMLR(2018)](#NGMLR(2018))
-- [minimp2(2018)](#minimap2(2018))
-- [Winnowmap(2020)](#Winnowmap(2020))
-- [LRA(2021)](#LRA(2021))
+- [NGMLR(2018)](#NGMLR2018)
+- [minimp2(2018)](#minimap22018)
+- [Winnowmap(2020)](#Winnowmap2020)
+- [LRA(2021)](#LRA2021)
 
 # NGMLR(2018)
 ## Project Links
