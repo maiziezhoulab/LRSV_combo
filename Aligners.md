@@ -25,7 +25,7 @@ https://doi.org/10.1038/s41592-018-0001-7
 }
 ```
 ## Installation & Dependencies
-### Installation
+### Installation Methods
 1. Install from bioconda
    ```
    conda install ngmlr
@@ -113,7 +113,7 @@ https://doi.org/10.1093/bioinformatics/btab705
 }
 ```
 ## Installation & Dependencies
-### Installation
+### Installation Methods
 1. Install from bioconda
    ```
    conda install -c bioconda minimap2
@@ -184,7 +184,7 @@ Long-read mapping to repetitive reference sequences using Winnowmap2 (2022)
 }
 ```
 ## Installation & Dependencies
-### Installation
+### Installation Methods
 ```
 git clone https://github.com/marbl/Winnowmap.git
 cd Winnowmap
@@ -239,7 +239,7 @@ https://doi.org/10.1371/journal.pcbi.1009078
 }
 ```
 ## Installation & Dependencies
-### Installation
+### Installation Methods
 1. Install through bioconda:
    ```
    conda install -c bioconda lra
