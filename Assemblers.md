@@ -2,7 +2,7 @@
 - [Assemblers](#Assemblers)
 	- [Hifiasm (2021)](#Hifiasm-2021)
 	- [Canu/HiCanu (2017/2020)](#CanuHiCanu-20172020)
-	- [Flye](#Flye)
+	- [Flye (2019)](#Flye-2019)
 	- [Peregrine](#Peregrine)
 	- [wtdbg2](#wtdbg2)
 	- [IPA](#IPA)
@@ -167,6 +167,69 @@ canu -p ${prefix} -d ${outdir} genomeSize=3100m useGrid=false maxThreads=32 -pac
 ```
 ### Other notes
 1. The output of Canu/HiCanu could be further processed with [purge_dups](https://github.com/dfguan/purge_dups) (or see section [purge_dups](#purgedups)) to get primary and alternate contigs
+
+## Flye (2019)
+### Project Links
+#### Github Repo:
+https://github.com/fenderglass/Flye
+#### Publication:
+Assembly of long, error-prone reads using repeat graphs
+https://doi.org/10.1038/s41587-019-0072-8
+##### BibTeX
+```
+@article{kolmogorov2019assembly,
+  title={Assembly of long, error-prone reads using repeat graphs},
+  author={Kolmogorov, Mikhail and Yuan, Jeffrey and Lin, Yu and Pevzner, Pavel A},
+  journal={Nature biotechnology},
+  volume={37},
+  number={5},
+  pages={540--546},
+  year={2019},
+  publisher={Nature Publishing Group}
+}
+```
+See more publication links in their github repo (e.g. metaFlye)
+### Installation & Dependencies
+#### Installation Methods
+1. Install from conda
+   ```
+   conda install flye
+   ```
+2. Install from github repo (compile)
+   ```
+   git clone https://github.com/fenderglass/Flye
+   cd Flye
+   make
+   ```
+3. Install from github repo (setup.py)
+   ```
+   git clone https://github.com/fenderglass/Flye
+   cd Flye
+   python setup.py install
+   ```
+for more information, see [here](https://github.com/fenderglass/Flye/blob/flye/docs/INSTALL.md)
+#### Dependencies
+(for install form repo)
+```
+Python 2.7 or 3.5+ (with setuptools package installed)
+C++ compiler with C++11 support (GCC 4.8+ / Clang 3.3+ / Apple Clang 5.0+)
+GNU make
+Git
+Core OS development headers (zlib, ...)
+```
+### Inputs & Outputs
+#### Inputs
+Flye can handle **Pacbio CLR** , **Pacbio HiFi** and **Nanopore** reads.
+Flye accepts both `fastq/fq` and `fasta/fa`, can be gzipped
+#### Outputs
+`.fasta`, `.gfa`, and `.gv`
+### Commands used
+
+```
+
+```
+### Other notes
+1. 
 
 ## Toolname (year)
 ### Project Links
