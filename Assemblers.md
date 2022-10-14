@@ -3,10 +3,10 @@
 	- [Hifiasm (2021)](#Hifiasm-2021)
 	- [Canu/HiCanu (2017/2020)](#CanuHiCanu-20172020)
 	- [Flye (2019)](#Flye-2019)
-	- [Peregrine](#Peregrine)
-	- [wtdbg2](#wtdbg2)
-	- [IPA](#IPA)
-	- [Shasta](#Shasta)
+	- [Peregrine (2019)](#Peregrine-2019)
+	- [wtdbg2 (2020)](#wtdbg2-2020)
+	- [IPA (2020)](#IPA-2020)
+	- [Shasta (2020)](#Shasta-2020)
 - [Auxilary Tools](#Auxilary-Tools)
 
 # Assemblers
@@ -222,16 +222,225 @@ Core OS development headers (zlib, ...)
 Flye can handle **Pacbio CLR** , **Pacbio HiFi** and **Nanopore** reads.
 Flye accepts both `fastq/fq` and `fasta/fa`, can be gzipped
 #### Outputs
-`.fasta`, `.gfa`, and `.gv`
+`.fasta`, `.gfa`, and `.gv` in `${outdir}`
 ### Commands used
 
 ```
+reads=your_read_file
+outdir=your_output_directory
 
+#Hifi
+flye --pacbio-hifi ${reads} --out-dir ${outdir} --threads 20
+#Nanopore Promethion
+flye --nano-raw ${reads} --out-dir ${outdir} --threads 20
 ```
 ### Other notes
-1. 
+1. None 
 
-## Toolname (year)
+## Peregrine (2019)
+### Project Links
+#### Github Repo:
+https://github.com/cschin/Peregrine
+#### Publication:
+None
+##### BibTeX
+```
+@webpage{peregrine2019,
+	title  = {Peregrine: Fast Genome Assembler Using SHIMMER Index},
+	url = {https://github.com/cschin/Peregrine}
+```
+### Installation & Dependencies
+#### Installation Methods
+1. Install from [Docker Image](https://hub.docker.com/r/cschin/peregrine/tags)
+   ```
+   #example: pull latest image
+   #Docker
+   docker pull cschin/peregrine:latest
+   #Singularity
+   singularity pull docker://cschin/peregrine:latest
+   ```
+#### Dependencies
+```
+Docker or Singularity
+```
+### Inputs & Outputs
+#### Inputs
+Long reads `fasta`, `fastq`, `fasta.gz` or `fastq.gz` files
+#### Outputs
+primary contigs: `${out_dir}/p_ctg_cns.fa`
+alt contigs: `${out_dir}/a_ctg_cns.fa`
+### Commands used
+
+```
+reads_fofn=reads_fofn_file
+peregrine_sif=your_peregrine_sif_image
+out_dir=your_output_dir
+
+echo -e "yes\n" | singularity run ${peregrine_sif} asm ${reads_fofn} 48 48 48 12 48 12 48 48 48 --with-consensus --with-alt --shimmer-r 3 --best_n_ovlp 8 --output ${out_dir}
+```
+### Other notes
+1. fofn file is file of file names. In a fofn file, each line is a path to one file (here is a read file). Here it should be like a list of your input reads 
+2. Peregrine does not require users to specify the sequencing technology, but on the Nanopore Promethion data used in the evaluation, peregrine gave empty assembly. The reason remains unclear.
+3. The author has published an [updated Peregrine Genome Assembler](https://github.com/cschin/peregrine-2021) **Peregrine-2021: A faster and minimum genome assembler**
+
+## wtdbg2 (2020)
+### Project Links
+#### Github Repo:
+https://github.com/ruanjue/wtdbg2
+#### Publication:
+Fast and accurate long-read assembly with wtdbg2 
+https://doi.org/10.1038/s41592-019-0669-3
+##### BibTeX
+```
+@article{ruan2020fast,
+  title={Fast and accurate long-read assembly with wtdbg2},
+  author={Ruan, Jue and Li, Heng},
+  journal={Nature methods},
+  volume={17},
+  number={2},
+  pages={155--158},
+  year={2020},
+  publisher={Nature Publishing Group}
+}
+```
+### Installation & Dependencies
+#### Installation Methods
+1. Install from github repo
+   ```
+   git clone https://github.com/ruanjue/wtdbg2
+   cd wtdbg2 && make
+   ```
+#### Dependencies
+```
+Note:
+We have bulid and run wtdbg2 successfully with GCC/10.2.0 and CMake/3.18.4, not sure if lower version also works
+```
+### Inputs & Outputs
+#### Inputs
+PacBio or Oxford Nanopore Technologies (ONT) reads, `fasta`, `fastq`, `fasta.gz` or `fastq.gz` files
+#### Outputs
+The main assembly output is  `${out_prefix}.cns.fa`
+### Commands used
+
+```
+wtdbg2_dir=path_to_the_wtdbg2_dir
+reads=your_read_file
+out_prefix=name_or_prefix_for_your_output
+prefix=ccs #for hifi reads
+#prefix=ont #for hifi reads
+
+${wtdbg2_dir}/wtdbg2.pl -t 20 -x ${prefix} -g 2.9g -o ${out_prefix} ${reads}
+```
+### Other notes
+1. wtdbg2 aimed to assemble long noisy reads, so there is no phasing module. K-bin is better at tolerating sequencing errors and processing long reads very fast, but leads to collapse haplotypes. see [here](https://github.com/ruanjue/wtdbg2/issues/240#issuecomment-925435605)
+
+## IPA (2020)
+### Project Links
+#### Github Repo:
+https://github.com/PacificBiosciences/pbipa
+For more information:
+https://github.com/PacificBiosciences/pbbioconda/wiki/Improved-Phased-Assembler
+#### Publication:
+None
+##### BibTeX
+```
+@webpage{ipa2020,
+	title  = {Improved Phased Assembler},
+	url = {https://github.com/PacificBiosciences/pbipa}
+```
+### Installation & Dependencies
+#### Installation Methods
+1. Install from Anaconda
+   ```
+   conda create -n ipa -c bioconda -c conda-forge -c defaults
+   conda activate ipa
+   conda install pbipa
+   #Validate installation
+   ipa validate
+   ```
+#### Dependencies
+```
+Handled by conda
+```
+### Inputs & Outputs
+#### Inputs
+**HiFi reads only**, `fasta`, `fastq`, `fasta.gz` or `fastq.gz` files
+#### Outputs
+Final assembly outputs are in `./RUN/assembly-results`, this is a softlink to `./RUN/19-final/`
+### Commands used
+
+```
+reads=your_reads_file
+
+ipa local --nthreads 25 --njobs 4 -i ${reads}
+```
+### Other notes
+1. We have only run IPA in local mode (on a single node), for running IPA in dist mode, please see read their [github repo](https://github.com/PacificBiosciences/pbbioconda/wiki/Improved-Phased-Assembler)
+
+
+## Shasta (2020)
+### Project Links
+#### Github Repo:
+https://github.com/paoloshasta/shasta
+Full documentation:
+https://paoloshasta.github.io/shasta/
+Quick start:
+https://paoloshasta.github.io/shasta/QuickStart.html
+#### Publication:
+Nanopore sequencing and the Shasta toolkit enable efficient de novo assembly of eleven human genomes
+https://doi.org/10.1038/s41587-020-0503-6
+##### BibTeX
+```
+@article{shafin2020nanopore,
+  title={Nanopore sequencing and the Shasta toolkit enable efficient de novo assembly of eleven human genomes},
+  author={Shafin, Kishwar and Pesout, Trevor and Lorig-Roach, Ryan and Haukness, Marina and Olsen, Hugh E and Bosworth, Colleen and Armstrong, Joel and Tigyi, Kristof and Maurer, Nicholas and Koren, Sergey and others},
+  journal={Nature biotechnology},
+  volume={38},
+  number={9},
+  pages={1044--1053},
+  year={2020},
+  publisher={Nature Publishing Group}
+}
+```
+### Installation & Dependencies
+#### Installation Methods
+1. Install from release
+   ```
+   # Download the executable for the latest release.
+	curl -O -L https://github.com/paoloshasta/shasta/releases/download/0.10.0/shasta-Linux-0.10.0
+
+	# Grant execute permissions.
+	chmod ugo+x shasta-Linux-0.10.0   
+   ```
+#### Dependencies
+```
+None, just use the downloaded release
+```
+### Inputs & Outputs
+#### Inputs
+**Nanopore reads only**, `fasta`, `fastq`, `fasta.gz` or `fastq.gz` files
+Note: Although Shasta provided one predefined configuration for Pacbio reads, but not sure if that was still effective. Mainly for Nanopore reads  
+#### Outputs
+The main assembly output is `./ShastaRun/Assembly.fasta`
+### Commands used
+
+```
+reads=your_read_file
+shasta=path_to_shasta #eg: path to shasta-Linux-0.10.0 
+
+${shasta} --input ${reads} --config Nanopore-UL-Dec2019
+```
+### Other notes
+1. Shasta provided many predefined configurations. Choose proper configuration accroding to the feature of your sequencing data (like guppy version etc.). To list all available configurations, use `${shasta} --command listConfigurations`. To check the detail of a specific configure, use `${shasta} --command listConfiguration --config Nanopore-May2022`, replace Nanopore-May2022 with the config name you want.
+2. Memory requirement: 
+   >Memory requirements for optimal performance are roughly proportional to genome size and coverage and are around 4 to 6 bytes per input base. This only counts input bases that are used in the assembly - that is, excluding reads that were discarded because they were too short or for other reasons. For a human-size genome (≈3 Gb) at coverage 60x, this works out to around 1 TB of memory.
+   
+   for more details, please see [here](https://paoloshasta.github.io/shasta/Running.html#MemoryRequirements).
+   We ran Shasta on the Nanopore Promethion data (~45x) with 1000G
+
+
+# Auxilary Tools
+## HapDup
 ### Project Links
 #### Github Repo:
 
@@ -243,13 +452,13 @@ Flye accepts both `fastq/fq` and `fasta/fa`, can be gzipped
 ```
 ### Installation & Dependencies
 #### Installation Methods
-1. Install from bioconda
+1. Install from release
    ```
-   
+
    ```
-2. Install from github repo
+1. Install from release
    ```
-   
+
    ```
 #### Dependencies
 ```
@@ -266,4 +475,41 @@ Flye accepts both `fastq/fq` and `fasta/fa`, can be gzipped
 
 ```
 ### Other notes
-1. 
+1. None
+
+## purg_dups
+### Project Links
+#### Github Repo:
+
+#### Publication:
+
+##### BibTeX
+```
+
+```
+### Installation & Dependencies
+#### Installation Methods
+1. Install from release
+   ```
+
+   ```
+1. Install from release
+   ```
+
+   ```
+#### Dependencies
+```
+
+```
+### Inputs & Outputs
+#### Inputs
+
+#### Outputs
+
+### Commands used
+
+```
+
+```
+### Other notes
+1. None
