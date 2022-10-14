@@ -1,5 +1,5 @@
 # LRSV Combo
-#Table of Content
+# Table of Contents
 1. [Aligners](Aligners.md)
 2. [Assemblers](Assemblers.md)
 3. [SV Callers](SVCallers.md)
