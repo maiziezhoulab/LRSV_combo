@@ -10,6 +10,7 @@
 https://github.com/philres/ngmlr
 ### Publication:
 Accurate detection of complex structural variations using single-molecule sequencing (2018)
+
 https://doi.org/10.1038/s41592-018-0001-7
 #### BibTeX
 ```
@@ -83,6 +84,7 @@ See **NOTE**s above
 https://github.com/lh3/minimap2
 ### Publication:
 Minimap2: pairwise alignment for nucleotide sequences (2018)
+
 https://doi.org/10.1093/bioinformatics/bty191
 #### BibTeX
 ```
@@ -98,6 +100,7 @@ https://doi.org/10.1093/bioinformatics/bty191
 }
 ```
 New strategies to improve minimap2 alignment accuracy (2021)
+
 https://doi.org/10.1093/bioinformatics/btab705
 #### BibTeX
 ```
@@ -224,6 +227,7 @@ samtools index ${outname}.bam
 https://github.com/ChaissonLab/LRA
 ### Publication:
 lra: A long read aligner for sequences and contigs (2021)
+
 https://doi.org/10.1371/journal.pcbi.1009078
 #### BibTeX
 ```

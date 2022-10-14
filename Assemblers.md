@@ -7,6 +7,7 @@
 	- [wtdbg2 (2020)](#wtdbg2-2020)
 	- [IPA (2020)](#IPA-2020)
 	- [Shasta (2020)](#Shasta-2020)
+- [Auxilary Tools](#Auxilary-Tools)
 
 # Assemblers
 ## Hifiasm (2021)
@@ -15,6 +16,7 @@
 https://github.com/chhylp123/hifiasm
 #### Publication:
 Haplotype-resolved de novo assembly using phased assembly graphs with hifiasm (2021)
+
 https://doi.org/10.1038/s41592-020-01056-5
 ##### BibTeX
 ```
@@ -78,6 +80,7 @@ https://github.com/marbl/canu
 **Canu:**
 
 Canu: scalable and accurate long-read assembly via adaptive k-mer weighting and repeat separation (2017)
+
 https://doi.org/10.1101/gr.215087.116
 ##### BibTeX
 ```
@@ -95,6 +98,7 @@ https://doi.org/10.1101/gr.215087.116
 **Canu with Trio-binning:**
 
 De novo assembly of haplotype-resolved genomes with trio binning (2018)
+
 https://doi.org/10.1038/nbt.4277
 ##### BibTeX
 ```
@@ -112,6 +116,7 @@ https://doi.org/10.1038/nbt.4277
 **HiCanu:**
 
 HiCanu: accurate assembly of segmental duplications, satellites, and allelic variants from high-fidelity long reads (2020)
+
 https://doi.org/10.1101/gr.263566.120
 ##### BibTeX
 ```
@@ -173,6 +178,7 @@ canu -p ${prefix} -d ${outdir} genomeSize=3100m useGrid=false maxThreads=32 -pac
 https://github.com/fenderglass/Flye
 #### Publication:
 Assembly of long, error-prone reads using repeat graphs
+
 https://doi.org/10.1038/s41587-019-0072-8
 ##### BibTeX
 ```
@@ -337,6 +343,7 @@ ${wtdbg2_dir}/wtdbg2.pl -t 20 -x ${prefix} -g 2.9g -o ${out_prefix} ${reads}
 ### Project Links
 #### Github Repo:
 https://github.com/PacificBiosciences/pbipa
+
 For more information:
 https://github.com/PacificBiosciences/pbbioconda/wiki/Improved-Phased-Assembler
 #### Publication:
@@ -381,12 +388,15 @@ ipa local --nthreads 25 --njobs 4 -i ${reads}
 ### Project Links
 #### Github Repo:
 https://github.com/paoloshasta/shasta
+
 Full documentation:
 https://paoloshasta.github.io/shasta/
+
 Quick start:
 https://paoloshasta.github.io/shasta/QuickStart.html
 #### Publication:
 Nanopore sequencing and the Shasta toolkit enable efficient de novo assembly of eleven human genomes
+
 https://doi.org/10.1038/s41587-020-0503-6
 ##### BibTeX
 ```
@@ -436,3 +446,79 @@ ${shasta} --input ${reads} --config Nanopore-UL-Dec2019
    
    for more details, please see [here](https://paoloshasta.github.io/shasta/Running.html#MemoryRequirements).
    We ran Shasta on the Nanopore Promethion data (~45x) with 1000G
+
+
+# Auxilary Tools
+## HapDup
+### Project Links
+#### Github Repo:
+
+#### Publication:
+
+##### BibTeX
+```
+
+```
+### Installation & Dependencies
+#### Installation Methods
+1. Install from release
+   ```
+
+   ```
+1. Install from release
+   ```
+
+   ```
+#### Dependencies
+```
+
+```
+### Inputs & Outputs
+#### Inputs
+
+#### Outputs
+
+### Commands used
+
+```
+
+```
+### Other notes
+1. None
+
+## purg_dups
+### Project Links
+#### Github Repo:
+
+#### Publication:
+
+##### BibTeX
+```
+
+```
+### Installation & Dependencies
+#### Installation Methods
+1. Install from release
+   ```
+
+   ```
+1. Install from release
+   ```
+
+   ```
+#### Dependencies
+```
+
+```
+### Inputs & Outputs
+#### Inputs
+
+#### Outputs
+
+### Commands used
+
+```
+
+```
+### Other notes
+1. None
