@@ -7,6 +7,7 @@
 	- [wtdbg2 (2020)](#wtdbg2-2020)
 	- [IPA (2020)](#IPA-2020)
 	- [Shasta (2020)](#Shasta-2020)
+- [Auxilary Tools](#Auxilary-Tools)
 
 # Assemblers
 ## Hifiasm (2021)
@@ -445,3 +446,79 @@ ${shasta} --input ${reads} --config Nanopore-UL-Dec2019
    
    for more details, please see [here](https://paoloshasta.github.io/shasta/Running.html#MemoryRequirements).
    We ran Shasta on the Nanopore Promethion data (~45x) with 1000G
+
+
+# Auxilary Tools
+## HapDup
+### Project Links
+#### Github Repo:
+
+#### Publication:
+
+##### BibTeX
+```
+
+```
+### Installation & Dependencies
+#### Installation Methods
+1. Install from release
+   ```
+
+   ```
+1. Install from release
+   ```
+
+   ```
+#### Dependencies
+```
+
+```
+### Inputs & Outputs
+#### Inputs
+
+#### Outputs
+
+### Commands used
+
+```
+
+```
+### Other notes
+1. None
+
+## purg_dups
+### Project Links
+#### Github Repo:
+
+#### Publication:
+
+##### BibTeX
+```
+
+```
+### Installation & Dependencies
+#### Installation Methods
+1. Install from release
+   ```
+
+   ```
+1. Install from release
+   ```
+
+   ```
+#### Dependencies
+```
+
+```
+### Inputs & Outputs
+#### Inputs
+
+#### Outputs
+
+### Commands used
+
+```
+
+```
+### Other notes
+1. None
