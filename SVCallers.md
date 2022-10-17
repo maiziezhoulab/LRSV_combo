@@ -41,6 +41,10 @@ numpy
 samtools  # samtools was used to extract read sequence in order to generate allele sequence.
 ```
 ### Inputs & Outputs
+#### Input
+HiFi reads
+#### Output
+vcf file
 ### Commands used
 ```
 ref=your_reference_file.fasta
@@ -90,6 +94,10 @@ numpy
 pyvcf
 ```
 ### Inputs & Outputs
+#### Input
+BAM file
+#### Output
+vcf file
 ### Commands used
 ```
 bam=your_bamfile.bam
@@ -157,6 +165,10 @@ makeblastdb and windowmasker
 hs-blastn ==0.0.5
 ```
 ### Inputs & Outputs
+#### Input
+BAM file
+#### Output
+vcf file
 ### Commands used
 ```
 datatype=your_datatype
@@ -184,6 +196,10 @@ https://github.com/pacificbiosciences/pbsv/
 conda install -c bioconda pbsv
 ```
 ### Inputs & Outputs
+#### Input
+BAM file
+#### Output
+vcf file
 ### Commands used
 ```
 prefix=your_vcf_name
@@ -230,6 +246,10 @@ pip install .
 -   _py-cpuinfo_ (>=7.0.0) for CPU info retrieval (checking for SIMD capabilities)
 
 ### Inputs & Outputs
+#### Input
+BAM file
+#### Output
+vcf file
 ### Commands used
 ```
 workdir=your_working_dir
@@ -267,6 +287,10 @@ Python >= 3.7
 pysam
 ```
 ### Inputs & Outputs
+#### Input
+BAM file
+#### Output
+vcf file
 ### Commands used
 ```
 bam=your_bam_file.bam
@@ -296,6 +320,10 @@ Python >= 3.7
 pysam
 ```
 ### Inputs & Outputs
+#### Input
+BAM file
+#### Output
+vcf file
 ### Commands used
 ```
 bam=your_bamfile.bam
@@ -325,9 +353,102 @@ Snakemake
 Bedtools
 ```
 ### Inputs & Outputs
+#### Input
+BAM file or assembled contigs
+#### Output
+BED files
 ### Commands used
-### Other notes
+For BAM inputs:
+```
+bam=your_bam_file
+ref=your_reference_file
+prefix=prefix_of_outputs
+smartie_sv=path_to_smartie_sv
 
+mkdir variants
+
+samtools view -h ${bam} | ${smartie_sv}/bin/printgaps ${ref} variants/${prefix}
+
+python Convert_to_vcf_Smartie-sv.py --input variants/${prefix}.svs.bed --output variants/${prefix}.svs.vcf --support_thresh 4
+```
+For assembled contigs:
+1. create a config.json:
+	```
+	{
+			"install" :"path_to_smartie_sv",
+			"targets" : {
+					"your_ref_name" : "path_to_your_reference"
+					},
+					"queries" : {
+							"hap1"   : "path_to_hap1_contigs",
+							"hap2"   : "path_to_hap2_contigs"
+					}
+	}
+	```
+2. create a config.sh
+	```
+	# this is only if you don't have hdf library globally installed
+	#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:path_to/hdf5-1.8.17/lib/
+	```
+3. create a Snakemake file. Uncomment rule runBlasr and comment out rule runMinimap if you want to use (or successfully installed) Blasr. Note: here runMinimap is using preset for hifi reads, change `-x map-hifi` according to your own datasets
+	```
+	shell.prefix("source config.sh; set -eo pipefail ; ")
+
+	configfile: "config.json"
+
+	def _get_target_files(wildcards):
+		return config["targets"][wildcards.target]
+
+	def _get_query_files(wildcards):
+			return config["queries"][wildcards.query]
+
+	rule dummy:
+		 input: expand("variants/{target}-{query}.svs.bed", target=config["targets"], query=config["queries"])
+
+	rule callSVs:
+		 message: "Calling SVs"
+		 input  : SAM="mappings/{target}-{query}-aligned.sam", TARGET=_get_target_files, PG=config["install"] + "/bin/printgaps"
+		 output : "variants/{target}-{query}.svs.bed"
+		 shell  : """
+				cat {input.SAM} | {input.PG} {input.TARGET} variants/{wildcards.target}-{wildcards.query}
+		 """
+
+	#rule runBlasr:
+	#     message: "Aligning query to target"
+	#     input:   BL=config["install"] + "/bin/blasr", TARGET=_get_target_files, QUERY=_get_query_files
+	#     output:  "mappings/{target}-{query}-aligned.sam", "unmappings/{target}-{query}-unaligned.fasta"
+	#     shell:   """
+	#              {input.BL} -V 2  -clipping hard -alignContigs -sam -minMapQV 30 -nproc 6 -minPctIdentity 50 -unaligned {output[1]} {input.QUERY} {input.TARGET} -out {output[0]}
+	#     """
+
+
+	rule runMinimap:
+		 message: "Aligning query to target"
+		 input:   TARGET=_get_target_files, QUERY=_get_query_files
+		 output:  "mappings/{target}-{query}-aligned.sam"
+		 shell:   """
+							  minimap2 -t 10 --MD -Y -L -a -H -x map-hifi {input.TARGET} {input.QUERY} > {output}
+		 """
+	```
+4. Run:
+	```
+	prefix=prefix_of_final_output
+	
+	mkdir mappings unmappings variants
+
+	rm -rf .snakemake
+
+	snakemake -s Snakefile -w 50 -p -k -j 20
+	
+	python Convert_to_vcf_Smartie-sv.py --input your_ref_name-hap1.svs.bed --output your_ref_name-hap1.svs.vcf
+	python Convert_to_vcf_Smartie-sv.py --input your_ref_name-hap2.svs.bed --output your_ref_name-hap2.svs.vcf
+	python Merge_vcf_Smartie-sv.py --input1 your_ref_name-hap1.svs.vcf --input2 your_ref_name-hap2.svs.vcf --output ./${prefix}.vcf
+	```
+NOTE: `your_ref_name` should be the same as what you defined in `config.json`
+### Other notes
+1. Smartie_sv does include allele sequences in the bed file, but here we did not compute the consensus allele sequence and use symbolic format in the converted vcf.
+2. `Convert_to_vcf_Smartie-sv.py` and `Merge_vcf_Smartie-sv.py` could be found in `bin/`
+3. The indel output of Smartie_sv can take up a large amount of storage, you can disable the indel output by comment out `if((cigars[i]->type != 'X') & (cigars[i]->len < 50) ) *indels << ss.str();` (line 243 in `smartie-sv/src/print_gaps/main.cpp`) before running `make`
 ## NanoSV
 ### Project Links
 #### Github Repo:
@@ -341,20 +462,68 @@ conda install -c bioconda nanosv
 pip install nanosv
 ```
 ### Inputs & Outputs
+#### Input
+BAM file and bed file (see [here](https://github.com/mroosmalen/nanosv/tree/master/nanosv/bedfiles), or read their github readme)
+#### Output
+vcf file
 ### Commands used
-### Other notes
+```
+bam=your_bam_file
+vcf=output_vcf_file
+bed=the_bed_file_downloaded
 
+NanoSV -t 30 ${bam} -o ./${vcf} -s samtools -b ${bed}
+```
+### Other notes
+1. NanoSV may take several days to finish variant calling
+2. The vcf format of NanoSV is not compatible with Truvari's pass only filter. One solution is change the values in FILTER field to PASS
+3. you need to change the `##INFO=<ID=RT,Number=3` in output vcf to `##INFO=<ID=RT,Number=.`, and also change` ##FILTER=<ID=Gap` to `##FILTER=<ID=GAP`
 ## PBHoney
 ### Project Links
-#### Github Repo:
-#### Publication:
-### Installation & Dependencies
-#### Installation Methods
-#### Dependencies
-### Inputs & Outputs
-### Commands used
-### Other notes
+https://sourceforge.net/projects/pb-jelly/
 
+https://www.hgsc.bcm.edu/software/honey
+
+http://deb.debian.org/debian/pool/main/p/pbsuite/
+#### Publication:
+https://doi.org/10.1186/1471-2105-15-180
+### Installation & Dependencies
+PBHoney has many dependency issue due to it was developed in 2014, here we provided a .sh file to automatically install and fix the dependencies. See [here](https://github.com/LYC-vio/PBSuite_quick_installation), conda required.
+### Inputs & Outputs
+#### Input
+BAM file
+#### Output
+`.spots`file
+### Commands used
+```
+source path_to/PBSuite_15.8.24/setup.sh
+#you could find this path after install though the github link above, PBSuite_15.8.24 should be in the same folder where you clone the repo
+
+bam=your_bam_file
+prefix=your_output_prefix
+ref=your_reference_file
+
+Honey.py spots -n 10 -q 10 -m 70 -i 20 -e 2 -E 2 --spanMax 10000 --consensus None -o ${prefix}.INS --reference ${ref} ${bam}
+Honey.py spots -n 10 -q 10 -m 10 -i 20 -e 1 -E 1 --spanMax 100000 --consensus None -o ${prefix}.DEL --reference ${ref} ${bam}
+
+python Convert_to_vcf_PBHoney.py --input ${prefix}.DEL.spots --output ${prefix}.DEL.vcf
+python Convert_to_vcf_PBHoney.py --input ${prefix}.INS.spots --output ${prefix}.INS.vcf
+
+mv ${prefix}.DEL.vcf ${prefix}.DEL_temp.vcf
+mv ${prefix}.INS.vcf ${prefix}.INS_temp.vcf
+
+cat ${prefix}.DEL_temp.vcf | awk '{if($1 ~ /^#/ || $5 ~ /<DEL>/){print $0}}' > ${prefix}.DEL.vcf
+cat ${prefix}.INS_temp.vcf | awk '{if($5 ~ /<INS>/){print $0}}' > ${prefix}.INS.vcf
+
+cat ${prefix}.DEL.vcf ${prefix}.INS.vcf > ${prefix}.DEL_INS_merge.vcf
+
+rm ${prefix}.INS_temp.vcf
+rm ${prefix}.DEL_temp.vcf
+rm ${prefix}.INS.vcf
+rm ${prefix}.DEL.vcf
+```
+### Other notes
+1. `Convert_to_vcf_PBHoney.py` could be found in `bin/`
 ## MAMnet
 ### Project Links
 #### Github Repo:
@@ -369,10 +538,29 @@ git clone https://github.com/micahvista/MAMnet.git
 cd MAMnet
 ```
 #### Dependencies
+see the `requirements.txt` in their github
 ### Inputs & Outputs
+#### Input
+BAM file
+#### Output
+vcf file
 ### Commands used
-### Other notes
+```
+MAMnetPath=path_to/MAMnet
+work_dir=./workdir
+bam=your_bam_file
+prefix=your_output_prefix
 
+python ${MAMnetPath}/MAMnet.py -bamfilepath ${bam} -threads 20 -step 50 -INTERVAL 1e7 -genotype True -workdir ${work_dir} -SV_weightspath ${MAMnetPath}/type -genotype_weightspath ${MAMnetPath}/geno -outputpath ./variants.vcf
+
+python MAMnet_convert_to_symbolic.py -i variants.vcf -o ${prefix}.vcf
+
+#filter by number of supporting reads (here is 10)
+cat #{prefix}.vcf | grep -w -v 'RE=1\|RE=2\|RE=3\|RE=4\|RE=5\|RE=6\|RE=7\|RE=8\|RE=9' > ${prefix}_REover10.vcf
+```
+### Other notes
+1. The original output of MAMnet use `.` in both REF and ALT fields
+2. Please find `MAMnet_convert_to_symbolic.py` in `bin/`
 ## DeBreak
 ### Project Links
 #### Github Repo:
@@ -390,9 +578,28 @@ conda install -c bioconda debreak
 -   minimap2 (tested with version 2.15)
 -   wtdbg2 (tested with version 2.5)
 ### Inputs & Outputs
+#### Input
+BAM file
+#### Output
+vcf file
 ### Commands used
-### Other notes
+```
+prefix=your_output_prefix
+ref=your_reference_file
+out_dir=your_output_dir
+bam=your_bam_file
 
+debreak -t 12 -p ${prefix} --bam ${bam} --outpath ${out_dir} --rescue_large_ins --rescue_dup --poa --ref ${ref}
+```
+### Other notes
+1. if output dir is `.`, then debreak vcf will be `.debresk.vcf` (hidden), use `ls -a` to find it
+2. add the line: `##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">` to the vcf header
+
+3. To treat DUP as INS:
+	```
+	sed -i "s/<DUP>/<INS>/g" DeBreak.vcf
+	sed -i "s/SVTYPE=DUP/SVTYPE=INS/g" DeBreak.vcf
+	```
 # Assembly Based SV Callers
 ## Dipcall
 ### Project Links
@@ -406,8 +613,24 @@ wget https://github.com/lh3/dipcall/releases/download/v0.3/dipcall-0.3_x64-linux
 tar -jxf dipcall-0.3_x64-linux.tar.bz2
 ```
 ### Inputs & Outputs
+#### Input
+Assembled contigs, bed (see [here](https://github.com/lh3/dipcall/tree/master/data), choose the bed file that corresponds to your reference file, this is only required for male sample)
+#### Output
+vcf file
 ### Commands used
+```
+bed=your_downloaded_bed
+ref=your_reference_file
+hp1=your_hap1_contig
+hp2=your_hap2_contig
+prefix=your_output_prefox
+
+run-dipcall -t 12 -x ${bed} ${prefix} ${ref} ${hp1} ${hp2} > ${prefix}.mak
+
+make -j2 -f ${prefix}.mak
+```
 ### Other notes
+1. None
 ## SVIM-asm
 ### Project Links
 #### Github Repo:
@@ -425,8 +648,29 @@ cd svim-asm
 pip install .
 ```
 ### Inputs & Outputs
+#### Input
+Assembled contigs
+#### Output
+vcf file
 ### Commands used
+```
+ref=your_reference_file
+hp1=your_hap1_contig
+hp2=your_hap2_contig
+prefix=your_output_prefix
+
+minimap2 -a -x asm5 --cs -r2k -t 12 ${ref} ${hp1} > alignments_contig.1.sam
+minimap2 -a -x asm5 --cs -r2k -t 12 ${ref} ${hp2} > alignments_contig.2.sam
+samtools sort -m4G -@4 -o alignments_contig.1.sorted.bam alignments_contig.1.sam
+samtools sort -m4G -@4 -o alignments_contig.2.sorted.bam alignments_contig.2.sam
+samtools index alignments_contig.1.sorted.bam
+samtools index alignments_contig.2.sorted.bam
+time svim-asm diploid ${prefix} alignments_contig.1.sorted.bam alignments_contig.2.sorted.bam ${ref}
+rm *.sam*
+rm *.bam*
+```
 ### Other notes
+1. None
 ## PAV
 ### Project Links
 #### Github Repo:
@@ -454,6 +698,52 @@ Command line tools needed:
 3.  samtools
 4.  bedToBigBed (optional, from UCSC browser tools)
 ### Inputs & Outputs
+#### Input
+Assembled contigs
+#### Output
+vcf file
 ### Commands used
+1. create an assemblies.tsv
+	```
+	NAME    HAP1    HAP2
+	sample_name     /path/to/hap1.fa    /path/to/hap2.fa
+	```
+2. create a config.json
+	```
+	{
+			"reference":"/path/to/your/reference_file",
+			"assembly_table":"/path/to/assemblies.tsv"
+	}
+	```
+3. Run:
+	```
+	PAV=/path/to/pav
+
+	snakemake -s ${PAV}/Snakefile -j 20
+	```
 ### Other notes
-PAV may crash with pysam 0.16, if you meet such problem, please downgrade pysam to 0.15.2.
+1. PAV may crash with pysam 0.16, if you meet such problem, please downgrade pysam to 0.15.2.
+2. (FIXED IN LATEST VERSION) PAV will raise errors if the contig names are all numbers. eg:
+
+	```
+	>100240
+	```
+
+	this can be fixed by adding characters/letters, eg:
+
+	```
+	>ctg100240
+	```
+3. (FIXED IN LATEST VERSION) The original vcf output of PAV has:
+
+	```
+	##INFO=<ID=SVLEN,Number=.,Type=String
+	```
+
+	which would cause error when evaluated with Truvari
+
+	This could be solved by changing it to
+
+	```
+	##INFO=<ID=SVLEN,Number=.,Type=Integer
+	```
