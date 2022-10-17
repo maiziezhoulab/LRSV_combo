@@ -7,7 +7,6 @@
 	- [wtdbg2 (2020)](#wtdbg2-2020)
 	- [IPA (2020)](#IPA-2020)
 	- [Shasta (2020)](#Shasta-2020)
-- [Auxilary Tools](#Auxilary-Tools)
 
 # Assemblers
 ## Hifiasm (2021)
