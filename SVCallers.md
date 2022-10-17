@@ -747,3 +747,4 @@ vcf file
 	```
 	##INFO=<ID=SVLEN,Number=.,Type=Integer
 	```
+4. PAV could be really slow on some assemblies, but the reason remains unclear. for more information, please refer to their github and their issue page
