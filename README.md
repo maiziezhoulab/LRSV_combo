@@ -6,4 +6,4 @@
 3. [SV Callers](SVCallers.md)
 
 # Data Availability
-All vcfs generated for evaluation can be found [here](https://doi.org/10.5281/zenodo.7199897)
+All vcfs generated for evaluation can be found [zenodo](https://doi.org/10.5281/zenodo.7199897)
