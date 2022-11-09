@@ -27,7 +27,30 @@ import matplotlib.pyplot as plt
 
 
 header_fformat = '##fileformat=VCFv4.2\n'
-header_chrome  = '''##contig=<ID=chr1,length=249250621>
+# header_chrome  = '''##contig=<ID=chr1,length=249250621>
+# ##contig=<ID=chr2,length=243199373>
+# ##contig=<ID=chr3,length=198022430>
+# ##contig=<ID=chr4,length=191154276>
+# ##contig=<ID=chr5,length=180915260>
+# ##contig=<ID=chr6,length=171115067>
+# ##contig=<ID=chr7,length=159138663>
+# ##contig=<ID=chr8,length=146364022>
+# ##contig=<ID=chr9,length=141213431>
+# ##contig=<ID=chr10,length=135534747>
+# ##contig=<ID=chr11,length=135006516>
+# ##contig=<ID=chr12,length=133851895>
+# ##contig=<ID=chr13,length=115169878>
+# ##contig=<ID=chr14,length=107349540>
+# ##contig=<ID=chr15,length=102531392>
+# ##contig=<ID=chr16,length=90354753>
+# ##contig=<ID=chr17,length=81195210>
+# ##contig=<ID=chr18,length=78077248>
+# ##contig=<ID=chr19,length=59128983>
+# ##contig=<ID=chr20,length=63025520>
+# ##contig=<ID=chr21,length=48129895>
+# ##contig=<ID=chr22,length=51304566>
+# '''
+header_chrome = '''##contig=<ID=chr1,length=249250621>
 ##contig=<ID=chr2,length=243199373>
 ##contig=<ID=chr3,length=198022430>
 ##contig=<ID=chr4,length=191154276>
@@ -49,6 +72,69 @@ header_chrome  = '''##contig=<ID=chr1,length=249250621>
 ##contig=<ID=chr20,length=63025520>
 ##contig=<ID=chr21,length=48129895>
 ##contig=<ID=chr22,length=51304566>
+##contig=<ID=chrX,length=155270560>
+##contig=<ID=chrY,length=59373566>
+##contig=<ID=chrM,length=16571>
+##contig=<ID=chr1_gl000191_random,length=106433>
+##contig=<ID=chr1_gl000192_random,length=547496>
+##contig=<ID=chr4_gl000193_random,length=189789>
+##contig=<ID=chr4_gl000194_random,length=191469>
+##contig=<ID=chr7_gl000195_random,length=182896>
+##contig=<ID=chr8_gl000196_random,length=38914>
+##contig=<ID=chr8_gl000197_random,length=37175>
+##contig=<ID=chr9_gl000198_random,length=90085>
+##contig=<ID=chr9_gl000199_random,length=169874>
+##contig=<ID=chr9_gl000200_random,length=187035>
+##contig=<ID=chr9_gl000201_random,length=36148>
+##contig=<ID=chr11_gl000202_random,length=40103>
+##contig=<ID=chr17_gl000203_random,length=37498>
+##contig=<ID=chr17_gl000204_random,length=81310>
+##contig=<ID=chr17_gl000205_random,length=174588>
+##contig=<ID=chr17_gl000206_random,length=41001>
+##contig=<ID=chr18_gl000207_random,length=4262>
+##contig=<ID=chr19_gl000208_random,length=92689>
+##contig=<ID=chr19_gl000209_random,length=159169>
+##contig=<ID=chr21_gl000210_random,length=27682>
+##contig=<ID=chrUn_gl000211,length=166566>
+##contig=<ID=chrUn_gl000212,length=186858>
+##contig=<ID=chrUn_gl000213,length=164239>
+##contig=<ID=chrUn_gl000214,length=137718>
+##contig=<ID=chrUn_gl000215,length=172545>
+##contig=<ID=chrUn_gl000216,length=172294>
+##contig=<ID=chrUn_gl000217,length=172149>
+##contig=<ID=chrUn_gl000218,length=161147>
+##contig=<ID=chrUn_gl000219,length=179198>
+##contig=<ID=chrUn_gl000220,length=161802>
+##contig=<ID=chrUn_gl000221,length=155397>
+##contig=<ID=chrUn_gl000222,length=186861>
+##contig=<ID=chrUn_gl000223,length=180455>
+##contig=<ID=chrUn_gl000224,length=179693>
+##contig=<ID=chrUn_gl000225,length=211173>
+##contig=<ID=chrUn_gl000226,length=15008>
+##contig=<ID=chrUn_gl000227,length=128374>
+##contig=<ID=chrUn_gl000228,length=129120>
+##contig=<ID=chrUn_gl000229,length=19913>
+##contig=<ID=chrUn_gl000230,length=43691>
+##contig=<ID=chrUn_gl000231,length=27386>
+##contig=<ID=chrUn_gl000232,length=40652>
+##contig=<ID=chrUn_gl000233,length=45941>
+##contig=<ID=chrUn_gl000234,length=40531>
+##contig=<ID=chrUn_gl000235,length=34474>
+##contig=<ID=chrUn_gl000236,length=41934>
+##contig=<ID=chrUn_gl000237,length=45867>
+##contig=<ID=chrUn_gl000238,length=39939>
+##contig=<ID=chrUn_gl000239,length=33824>
+##contig=<ID=chrUn_gl000240,length=41933>
+##contig=<ID=chrUn_gl000241,length=42152>
+##contig=<ID=chrUn_gl000242,length=43523>
+##contig=<ID=chrUn_gl000243,length=43341>
+##contig=<ID=chrUn_gl000244,length=39929>
+##contig=<ID=chrUn_gl000245,length=36651>
+##contig=<ID=chrUn_gl000246,length=38154>
+##contig=<ID=chrUn_gl000247,length=36422>
+##contig=<ID=chrUn_gl000248,length=39786>
+##contig=<ID=chrUn_gl000249,length=38502>
+##contig=<ID=hs37d5,length=35477943>
 '''
 header_infofield='''##INFO=<ID=SVTYPE,Number=1,Type=String,Description="Type of structural variant">
 ##INFO=<ID=END,Number=1,Type=Integer,Description="End position of the variant described in this record">
@@ -96,6 +182,7 @@ def vcf_regularization(vlf,out_dir,keep_refalt_seq=False,output_reg_vcfs=True):
             pass
 
         header_alt=''
+        #header_alt_contig=''
         with open(vcf_dir,'r') as ori_vcf:
             with open(out_dir+'/'+sv_caller+'_regularized_format.vcf','w') as new_vcf:
                 new_vcf.write(header_fformat)
@@ -105,10 +192,13 @@ def vcf_regularization(vlf,out_dir,keep_refalt_seq=False,output_reg_vcfs=True):
                 for line in ori_vcf:
                     if line[0] == '#':
                         if '##ALT=' in line:
+                        #if '##ALT=' in line or '##contig=' in line:
                             header_alt+=line
+                            #header_alt_contig+=line
                     else:
                         break
                 new_vcf.write(header_alt)
+                #new_vcf.write(header_alt_contig)
                 if SR_Tag is not None:
                     new_vcf.write('##INFO=<ID=SUPPORT,Number=1,Type=Integer,Description="Number of reads supporting this variant">\n')
                 new_vcf.write(header_infofield)
@@ -132,12 +222,18 @@ def vcf_regularization(vlf,out_dir,keep_refalt_seq=False,output_reg_vcfs=True):
                                 svtype = 'DEL'
                             elif len(fields[3])-len(fields[4]) < 0:
                                 svtype = 'INS'
+                            else:
+                                continue
                             svlen = abs(len(fields[3])-len(fields[4]))
                             if svtype == 'DEL':
                                 end = str(int(fields[1])+svlen)
                             else:
                                 end = fields[1]
                             svlen = str(svlen)
+
+                        if svtype not in ['DEL','INS','ins','del']:#Currently only support DEL and INS
+                            continue
+
                         genotype = sample_field[format_field.index('GT')]
 
                         if field_index==7:
@@ -294,9 +390,56 @@ def plot_overlap_by_callers(vcf_file,save_dir,sv_types=['ALL','DEL','INS']):
         plt.close(fig)
 
 
+def plot_svlen_by_shared_callers(vcf_file,save_dir,sv_types=['ALL','DEL','INS']):
 
-
+    svlen_dict = dict()
+    for sv_type in sv_types:
+        svlen_dict[sv_type] = OrderedDict()
     
+    with open(vcf_file,'r') as vcf:
+        for line in vcf:
+            if '##source=' in line:
+                all_sv_callers = line.rstrip('\n')[9:].split('/')
+                #all_sv_callers.reverse()
+                total_sv_caller_num = len(all_sv_callers)
+                break
+
+        for sv_type in sv_types:
+            for i in range(total_sv_caller_num,0,-1):
+                svlen_dict[sv_type][i] = list()
+
+        for line in vcf:
+            if line[0] != '#':
+                sv_callers=re.findall("SC=([^;\t]+)",line)[0].split(',')
+                sv_caller_num = len(sv_callers)
+                sv_type = re.findall("SVTYPE=(\w+)",line)[0]
+                svlen = float(re.findall("SVLEN=-?(\d+)",line)[0])
+
+                if 'ALL' in svlen_dict.keys():
+                    svlen_dict['ALL'][sv_caller_num].append(svlen)
+
+                if sv_type in svlen_dict.keys():
+                    svlen_dict[sv_type][sv_caller_num].append(svlen)
+
+    for sv_type in svlen_dict.keys():
+        sv_lens = list(svlen_dict[sv_type].values())
+        caller_numbers = list(svlen_dict[sv_type].keys())
+        # sv_lens = list()
+        # caller_numbers = list()
+        # for i in range(total_sv_caller_num,0,-1):
+        #     sv_lens.append(svlen_dict[sv_type][i])
+        #     caller_numbers.append(i)
+        fig, ax = plt.subplots(figsize=(8,4))
+        #ax.boxplot(sv_lens)
+        ax.violinplot(sv_lens)
+        ax.set_xticks([y+1 for y in range(len(caller_numbers))])
+        ax.set_xticklabels(caller_numbers)
+        ax.set_yscale("log")
+        matplotlib.rcParams['pdf.fonttype'] = 42
+        matplotlib.rcParams['ps.fonttype'] = 42
+        #plt.legend(bbox_to_anchor=(1.05, 0), loc=3, borderaxespad=0)
+        plt.savefig(save_dir+'/'+sv_type+'_SV_overlap_svlen_by_shared_callers.pdf',bbox_inches='tight')
+        plt.close(fig)
 
 
 if __name__ == "__main__":
@@ -311,6 +454,8 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    #NOTE: Currently we only support DEL and INS overlaping
+
     vlf = args.vcf_list_file
     tcf = args.truvari_config_file
     out_dir = args.out_dir
@@ -319,3 +464,4 @@ if __name__ == "__main__":
     reg_vcfs = vcf_regularization(vlf,out_dir,keep_refalt_seq=keep_refalt_seq)
     merged_vcf = truvari_overlap(reg_vcfs,out_dir,tcf)
     plot_overlap_by_callers(merged_vcf,out_dir,sv_types=['ALL','DEL','INS'])
+    plot_svlen_by_shared_callers(merged_vcf,out_dir,sv_types=['ALL','DEL','INS'])
