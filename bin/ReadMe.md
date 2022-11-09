@@ -54,3 +54,16 @@ Plot the SV length distribution of the given vcf(s), correspond to Figure 2 in p
 ### Usage
 Illustrates the breakpoint shift distribution of the SV calling results. Corresponds to Figure 3c and Figure 3g in paper main text.
 
+## Sequence Similarity Distribution Analysis
+### Code
+[Sequence_similarity_distribution.py](https://github.com/maiziezhoulab/LRSV_combo/blob/main/bin/Sequence_similarity_distribution.py)
+
+### Parameters:
+```
+'--truv_rslt_dir','-trd'
+```
+**truv_rslt_dir:** Truvari result dir, where you can find `tp-call.vcf`. Typically it should be a dir like `${Truvari_dir}/INS_DEL_50_`
+
+### Usage
+Illustrates the sequence similarity distribution of the SV calling results. Corresponds to Figure 3d and Figure 3h in paper main text.
+
