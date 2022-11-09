@@ -4,9 +4,6 @@
 ### Code
 [Truvari_eval.sh](https://github.com/maiziezhoulab/LRSV_combo/blob/main/bin/Truvari_eval.sh)
 
-### Usage
-Performs Truvari evaluation on a given vcf 
-
 ### Parameters:
 ```
 prefix=the_name_of_your_vcf(but without .vcf)
@@ -22,3 +19,20 @@ P=0.5
 r=500
 ```
 bench and bed files can be found in the ../bench dir. Note: these benchmarks only contain chr1-22, you may also need to run `tabix -p vcf ${bench}` on the benchmark vcfs to generate .vcf.gz.tbi files 
+
+### Usage
+Performs Truvari evaluation on a given vcf 
+
+## Analysis
+### Code
+[SVLEN_distribution_analysis.py](https://github.com/maiziezhoulab/LRSV_combo/blob/main/bin/SVLEN_distribution_analysis.py)
+[SVLEN_distribution_analysis_scatter.py](https://github.com/maiziezhoulab/LRSV_combo/blob/main/bin/SVLEN_distribution_analysis_scatter.py)
+
+### Parameters:
+```
+
+```
+
+
+### Usage
+Performs Truvari evaluation on a given vcf 
