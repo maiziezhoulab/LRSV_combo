@@ -30,9 +30,10 @@ Performs Truvari evaluation on a given vcf
 
 ### Parameters:
 ```
-
+'--vcf_list_file','-vlf'
+'--out_dir','-o_dir'
 ```
-
+**vcf_list_file:** A file which has three columns seperated by tab, one for caller name, one for the location of corresponding vcf file, one for caller type, each line corresponds to one SV caller. Example line:  `cuteSV  path/to/cuteSV/vcf  alignment`
 
 ### Usage
-Performs Truvari evaluation on a given vcf 
+Plot the SV length distribution of the given vcf(s), correspond to Figure 2 in paper. (Figure 2 was plotted with `SVLEN_distribution_analysis.py`)
