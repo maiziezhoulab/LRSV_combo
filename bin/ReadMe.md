@@ -25,7 +25,7 @@ Performs Truvari evaluation on a given vcf
 
 Outputs are stored in `Truvari_${prefix}`, this dir will be referred as **Truvari_dir** in latter parts
 
-## SV length distribution analysis
+## SV Length Distribution Analysis
 ### Code
 [SVLEN_distribution_analysis.py](https://github.com/maiziezhoulab/LRSV_combo/blob/main/bin/SVLEN_distribution_analysis.py)
 
@@ -41,7 +41,7 @@ Outputs are stored in `Truvari_${prefix}`, this dir will be referred as **Truvar
 ### Usage
 Plot the SV length distribution of the given vcf(s), correspond to Figure 2 in paper. (Figure 2 was plotted with `SVLEN_distribution_analysis.py`)
 
-## Breakpoint shift analysis
+## Breakpoint Shift Analysis
 ### Code
 [Breakpoint_shift.py](https://github.com/maiziezhoulab/LRSV_combo/blob/main/bin/Breakpoint_shift.py)
 
