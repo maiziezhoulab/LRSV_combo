@@ -1,4 +1,4 @@
-# LRSV Combo
+# Long Read Based SV Calling Tools Analysis
 # Table of Contents
 1. [Aligners](Aligners.md)
 2. [Assemblers](Assemblers.md)
