@@ -21,11 +21,14 @@ r=500
 bench and bed files can be found in the ../bench dir. Note: these benchmarks only contain chr1-22, you may also need to run `tabix -p vcf ${bench}` on the benchmark vcfs to generate .vcf.gz.tbi files 
 
 ### Usage
-Performs Truvari evaluation on a given vcf 
+Performs Truvari evaluation on a given vcf
 
-## Analysis
+Outputs are stored in `Truvari_${prefix}`, this dir will be referred as **Truvari dir** in latter parts
+
+## SV length distribution analysis
 ### Code
 [SVLEN_distribution_analysis.py](https://github.com/maiziezhoulab/LRSV_combo/blob/main/bin/SVLEN_distribution_analysis.py)
+
 [SVLEN_distribution_analysis_scatter.py](https://github.com/maiziezhoulab/LRSV_combo/blob/main/bin/SVLEN_distribution_analysis_scatter.py)
 
 ### Parameters:
@@ -37,3 +40,16 @@ Performs Truvari evaluation on a given vcf
 
 ### Usage
 Plot the SV length distribution of the given vcf(s), correspond to Figure 2 in paper. (Figure 2 was plotted with `SVLEN_distribution_analysis.py`)
+
+## Breakpoint shift analysis
+### Code
+[Breakpoint_shift.py](https://github.com/maiziezhoulab/LRSV_combo/blob/main/bin/Breakpoint_shift.py)
+
+### Parameters:
+```
+'--truv_rslt_dir','-trd'
+```
+**truv_rslt_dir:** Truvari 
+
+### Usage
+
