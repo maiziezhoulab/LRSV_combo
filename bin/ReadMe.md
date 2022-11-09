@@ -23,7 +23,7 @@ bench and bed files can be found in the ../bench dir. Note: these benchmarks onl
 ### Usage
 Performs Truvari evaluation on a given vcf
 
-Outputs are stored in `Truvari_${prefix}`, this dir will be referred as **Truvari dir** in latter parts
+Outputs are stored in `Truvari_${prefix}`, this dir will be referred as **Truvari_dir** in latter parts
 
 ## SV length distribution analysis
 ### Code
@@ -49,7 +49,8 @@ Plot the SV length distribution of the given vcf(s), correspond to Figure 2 in p
 ```
 '--truv_rslt_dir','-trd'
 ```
-**truv_rslt_dir:** Truvari 
+**truv_rslt_dir:** Truvari result dir, where you can find `tp-base.vcf` and `tp-call.vcf`. Typically it should be a dir like `${Truvari_dir}/INS_DEL_50_`
 
 ### Usage
+Illustrates the breakpoint shift distribution of the SV calling results. Corresponds to Figure 3c and Figure 3g in paper main text.
 
