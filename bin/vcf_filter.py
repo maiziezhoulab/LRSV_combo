@@ -14,7 +14,6 @@ def filter(vcf, out_dir,chrs=None,dipcall=False,remove_small_sv=False):
     out_INS_vcf = out_dir+'/'+vcf[:-4].split('/')[-1]+'_INS_noXY.vcf'
     #out_DEL_vcf = out_dir+'/'+vcf.rstrip('.vcf').split('/')[-1]+'_DEL_noXY.vcf'
     out_DEL_vcf = out_dir+'/'+vcf[:-4].split('/')[-1]+'_DEL_noXY.vcf'
-
     with open(vcf,'r') as fin:
         with open(out_vcf,'w') as fout:
             with open(out_INS_vcf,'w') as fins:
