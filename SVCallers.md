@@ -561,6 +561,7 @@ cat #{prefix}.vcf | grep -w -v 'RE=1\|RE=2\|RE=3\|RE=4\|RE=5\|RE=6\|RE=7\|RE=8\|
 ### Other notes
 1. The original output of MAMnet use `.` in both REF and ALT fields
 2. Please find `MAMnet_convert_to_symbolic.py` in `bin/`
+3. MAMnet use this to generate the output vcf name: `outputpath = bamfilepath.split('/')[-1][:-4] + '.vcf'`. The argument -outputpath does not work as expected
 ## DeBreak
 ### Project Links
 #### Github Repo:
