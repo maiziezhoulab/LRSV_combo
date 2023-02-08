@@ -8,6 +8,7 @@
 	- [pbsv](#pbsv)
 	- [SVIM](#SVIM)
 	- [Sniffles](#Sniffles)
+	- [Sniffles2](#Sniffles2)
 	- [Smartie-sv](#Smartie-sv)
 	- [NanoSV](#NanoSV)
 	- [PBHoney](#PBHoney)
