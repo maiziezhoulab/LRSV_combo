@@ -303,6 +303,8 @@ Note:`--ccs_reads` is only for Pacbio CCS/HiFi sequencing data
 Sniffles/Sniffles2 have been tested on `python==3.9.5 pysam==0.16.0.1` according to the official repository. However, if you meet some problems with pysam (eg. segment fault), consider downgrading pysam to 0.15.2 or upgrade it to 0.17 or higher.
 
 Sniffles also requires `MD` tag information in your alignment file. NGMLR includes `MD` tag by default, for minimap2 and Winnowmap, you need to add `--MD` flag, and for LRA you need to add `--printMD` flag when aligning reads to reference.
+
+If you are using Truvari without `--passonly` flag to evaluate Sniffles, please add `##FILTER=<ID=STRANDBIAS,Description="Strandbias.">` in the header if its not there. 
 ## Sniffles2
 ### Project Links
 #### Github Repo:
