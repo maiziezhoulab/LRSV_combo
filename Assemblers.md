@@ -235,6 +235,8 @@ outdir=your_output_directory
 
 #Hifi
 flye --pacbio-hifi ${reads} --out-dir ${outdir} --threads 20
+#CLR
+flye --pacbio-raw ${reads} --out-dir ${outdir} --threads 20
 #Nanopore Promethion
 flye --nano-raw ${reads} --out-dir ${outdir} --threads 20
 ```
