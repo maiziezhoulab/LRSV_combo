@@ -332,10 +332,10 @@ The main assembly output is  `${out_prefix}.cns.fa`
 wtdbg2_dir=path_to_the_wtdbg2_dir
 reads=your_read_file
 out_prefix=name_or_prefix_for_your_output
-prefix=ccs #for hifi reads
-#prefix=ont #for hifi reads
+preset=ccs #for hifi reads
+#preset=ont #for hifi reads
 
-${wtdbg2_dir}/wtdbg2.pl -t 20 -x ${prefix} -g 2.9g -o ${out_prefix} ${reads}
+${wtdbg2_dir}/wtdbg2.pl -t 20 -x ${preset} -g 2.9g -o ${out_prefix} ${reads}
 ```
 ### Other notes
 1. wtdbg2 aimed to assemble long noisy reads, so there is no phasing module. K-bin is better at tolerating sequencing errors and processing long reads very fast, but leads to collapse haplotypes. see [here](https://github.com/ruanjue/wtdbg2/issues/240#issuecomment-925435605)
