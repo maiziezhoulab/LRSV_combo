@@ -148,7 +148,7 @@ reads=your_read_file.fastq
 preset=map-hifi #For HiFi reads
 output_name=your_output_name
 
-minimap2 -t 30 --MD -Y -L -a -H -x ${preset} ${ref} ${reads} | samtools sort  -o ${output_name}.bam
+minimap2 -t 30 --MD -Y -L -a -x ${preset} ${ref} ${reads} | samtools sort  -o ${output_name}.bam
 
 samtools index ${output_name}.bam
 ```
