@@ -596,7 +596,7 @@ bam=your_bam_file
 debreak -t 12 -p ${prefix} --bam ${bam} --outpath ${out_dir} --rescue_large_ins --rescue_dup --poa --ref ${ref}
 ```
 ### Other notes
-1. if output dir is `.`, then debreak vcf will be `.debresk.vcf` (hidden), use `ls -a` to find it
+1. if output dir is `.`, then debreak vcf will be `.debreak.vcf` (hidden), use `ls -a` to find it
 2. add the line: `##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">` to the vcf header
 
 3. To treat DUP as INS:
