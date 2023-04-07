@@ -8,8 +8,8 @@
 	- [IPA (2020)](#IPA-2020)
 	- [Shasta (2020)](#Shasta-2020)
 - [Auxiliary Tools](#Auxiliary-Tools)
-	- [HapDup](#HapDup)
-	- [purge_dups](#purge_dups)
+	- [HapDup (2021)](#HapDup-2021)
+	- [purge_dups (2020)](#purge_dups-2020)
 
 # Assemblers
 ## Hifiasm (2021)
@@ -453,5 +453,170 @@ ${shasta} --input ${reads} --config Nanopore-UL-Dec2019
 
 
 # Auxiliary Tools
-## HapDup
-## purge_dups
+## HapDup (2021)
+### Project Links
+#### Github Repo:
+https://github.com/KolmogorovLab/hapdup
+#### Publication:
+Haplotype-aware variant calling enables high accuracy in nanopore long-reads using deep neural networks
+
+https://doi.org/10.1038/s41592-021-01299-w
+##### BibTeX
+@article{shafin2021haplotype,
+  title={Haplotype-aware variant calling enables high accuracy in nanopore long-reads using deep neural networks},
+  author={Shafin, Kishwar and Pesout, Trevor and Chang, Pi-Chuan and Nattestad, Maria and Kolesnikov, Alexey and Goel, Sidharth and Baid, Gunjan and Eizenga, Jordan M and Miga, Karen H and Carnevali, Paolo and others},
+  journal={BioRxiv},
+  year={2021},
+  publisher={Cold Spring Harbor Laboratory}
+}
+### Installation & Dependencies
+#### Installation Methods
+```
+Pulled from docker hub (https://hub.docker.com/repository/docker/mkolmogo/hapdup)
+docker pull mkolmogo/hapdup
+or use Singularity to pull
+singularity pull docker://mkolmogo/hapdup:0.12
+```
+#### Dependencies
+```
+Docker or Singularity
+```
+### Inputs & Outputs
+#### Inputs
+Reads and assembled contigs
+#### Outputs
+For latest HapDup:
+```
+hapdup_dual_{1,2}.fasta - dual assembly <- we used these fastas
+phased_blocks_hp{1,2}.bed - phased blocks coordinates (in dual assmeblies)
+hapdup_phased_{1,2}.fasta - haplotype-resolved assmebly
+```
+for older versions of HapDup
+```
+hapdup_dual_{1,2}.fasta - dual assembly <- we used these fastas
+```
+See more detailed description [here](https://github.com/KolmogorovLab/hapdup#output-files)
+### Commands used
+```
+reads=path/to/your/reads.fastq
+outdir=`pwd`
+assembly=path/to/your/assembly.fasta
+hapdup_sif=path/to/your/hapdup.sif
+
+time minimap2 -ax map-hifi -t 30 ${assembly} ${reads} | samtools sort -@ 4 -m 4G > assembly_lr_mapping.bam
+samtools index -@ 4 assembly_lr_mapping.bam
+
+time singularity exec --bind ${outdir} ${hapdup_sif}\
+	hapdup --assembly ${assembly} --bam ${outdir}/assembly_lr_mapping.bam --out-dir ${outdir}/hapdup -t 64 --rtype hifi
+```
+### Other notes
+1. The commands above are for Hifi results, to use on ONT, replace `-ax map-hifi` and `--rtype hifi` with corresponding ONT configurations.
+2. Not clear if HapDup has good support for CLR reads now.
+3. If the sequencing quality values in .fastq file are all `!`, we replace them with `-` to run HapDup, but not sure if this will cause any bias. 
+
+## purge_dups (2020)
+### Project Links
+#### Github Repo:
+https://github.com/dfguan/purge_dups
+#### Publication:
+Identifying and removing haplotypic duplication in primary genome assemblies
+
+https://doi.org/10.1093/bioinformatics/btaa025
+##### BibTeX
+@article{guan2020identifying,
+  title={Identifying and removing haplotypic duplication in primary genome assemblies},
+  author={Guan, Dengfeng and McCarthy, Shane A and Wood, Jonathan and Howe, Kerstin and Wang, Yadong and Durbin, Richard},
+  journal={Bioinformatics},
+  volume={36},
+  number={9},
+  pages={2896--2898},
+  year={2020},
+  publisher={Oxford University Press}
+}
+### Installation & Dependencies
+#### Installation Methods
+```
+git clone https://github.com/dfguan/purge_dups.git
+cd purge_dups/src && make
+```
+for more details, please refer to their github
+#### Dependencies
+```
+zlib
+minimap2
+runner (optional)
+python3 (optional)
+```
+### Inputs & Outputs
+#### Inputs
+Reads and assembled contigs
+#### Outputs
+purge.fa is the final cleaned assembly, and junk contigs and haplotypic duplications are in the hap.fa
+### Commands used
+```
+purge_dups_dir=path/to/purge_dups
+read_list=read_list.fofn
+pri_asm=path/to/assembly.fa
+#preset for HiFi:asm20
+#preset for CLR :map-pb
+#preset for ONT :map-ont
+preset=asm20
+#minimap2 threads
+threads=32
+
+#Step1-1 and step1-2 could run in parallel
+
+##Step1-1
+#If you have a large genome, please set minimap2 -I option to ensure the genome can be indexed once, otherwise read depth can be wrong.
+for read_file_path in $(cat $read_list)
+do
+	read_name=$(basename $read_file_path | sed 's/.fasta//' | sed 's/.fastq//' | sed 's/.fa//' | sed 's/.fq//' | sed 's/.gz//')
+	minimap2 -t ${threads} -x $preset $pri_asm $read_file_path | gzip -c - > ${read_name}.paf.gz
+done
+${purge_dups_dir}/bin/pbcstat *.paf.gz
+
+#Pick cutoffs automatically:
+${purge_dups_dir}/bin/calcuts PB.stat > cutoffs 2>calcults.log
+
+#NOTE:you could set cutoffs manually:
+#the lower bound for read depth with -l (2 or 5, not sure about the criteria)
+#transition between haploid and diploid with -m (typically 0.75*coverage)
+#upper bound for read depth with -u (typically 3*coverage)
+#For example, for a 46 coverage data:
+#${purge_dups_dir}/bin/calcuts -l 2 -m 35 -u 138 PB.stat > cutoffs 2>calcults.log
+
+##Step1-2
+pri_asm_name=$(basename $pri_asm | sed 's/.fasta//' | sed 's/.fa//')
+${purge_dups_dir}/bin/split_fa $pri_asm > $pri_asm_name.split
+minimap2 -t ${threads} -x asm5 -DP $pri_asm_name.split $pri_asm_name.split | gzip -c - > $pri_asm_name.split.self.paf.gz
+
+##Step2
+#the 1st, 4th and the last value in cutoffs corresponds to -l, -m, -u respectively
+${purge_dups_dir}/bin/purge_dups -2 -T cutoffs -c PB.base.cov $pri_asm_name.split.self.paf.gz > dups.bed 2> purge_dups.log
+
+##Step3
+#this command will only remove haplotypic duplications at the ends of the contigs. If you also want to remove the duplications in the middle, please remove -e option at your own risk, it may delete false positive duplications. For more options, please refer to get_seqs -h.
+${purge_dups_dir}/bin/get_seqs -e dups.bed $pri_asm
+
+##Outputs:
+#purge.fa is the final cleaned assembly, and junk contigs and haplotypic duplications are in the hap.fa
+
+##Post analysis
+python ${purge_dups_dir}/scripts/hist_plot.py PB.stat Cutoffs.png -c cutoffs
+
+
+##Reference:
+#cutoffs:
+#https://github.com/dfguan/purge_dups/issues/75
+#https://github.com/marbl/canu/issues/1731
+#ONT
+#https://github.com/dfguan/purge_dups/issues/20
+#Output
+#https://github.com/dfguan/purge_dups/issues/6
+```
+Example of the content of a read_list.fofn file (fofn: **f**ile **o**f **f**ile **n**ames):
+```
+/data/Datasets/Pacbio_data/PacBio_CCS_15kb_20kb_chemistry2_reads_NA24385/reads/NA24385_Merged.fastq
+```
+### Other notes
+- purge_dups was used on the output of Canu/Hicanu (.asm.contigs.fasta file)
