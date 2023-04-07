@@ -337,6 +337,7 @@ sniffles --input ${bam} --reference ${ref} --vcf ${prefix}.vcf --threads 20
 ```
 ### Other notes
 1. Sniffles2 automatically decides supporting reads threshold for SV calling, while Sniffles uses 10 as default threshold for number of supporting reads. However, this automatic threshold does not always give the optimal output. For `CLR_L2` library in our analysis, we set the threshold to 10 manually to get a better result, otherwise Sniffles2 will call a large amount of false positive INSs in the 1kb~10kb SV length range.
+
 Others are same as Sniffles.
 ## Smartie-sv
 ### Project Links
