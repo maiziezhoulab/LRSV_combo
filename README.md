@@ -4,7 +4,7 @@
 2. [Assemblers](Assemblers.md)
 3. [Datasets](Datasets.md)
 4. [SV Callers](SVCallers.md)
-5. [Evaluators](Evaluators.md)
+5. [SV Evaluators](SVEvaluators.md)
 6. [Analysis Code Readme](bin/ReadMe.md)
 
 # Data Availability
