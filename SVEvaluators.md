@@ -68,6 +68,7 @@ https://doi.org/10.1186/s13059-022-02840-6
 
 ```
 ## Other notes
+### Pipeline and parameter definition
 
 # SURVIVOR
 ## Project Links
