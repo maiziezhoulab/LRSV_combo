@@ -513,6 +513,7 @@ time singularity exec --bind ${outdir} ${hapdup_sif}\
 1. The commands above are for Hifi results, to use on ONT, replace `-ax map-hifi` and `--rtype hifi` with corresponding ONT configurations.
 2. Not clear if HapDup has good support for CLR reads now.
 3. If the sequencing quality values in .fastq file are all `!`, we replace them with `-` to run HapDup, but not sure if this will cause any bias. 
+4. HapDup was used on the output of the assemblers which only produce collapsed assembly for diploid genomes.
 
 ## purge_dups (2020)
 ### Project Links
