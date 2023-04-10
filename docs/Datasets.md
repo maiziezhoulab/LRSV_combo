@@ -3,6 +3,7 @@
 - [Pacbio Hifi](#Pacbio-Hifi)
 - [Pacbio CLR](#Pacbio-CLR)
 - [Oxford Nanopore Technology](#Oxford-Nanopore-Technology)
+- [HCC1395 Tumor-Normal Pair](#HCC1395-Tumor-Normal-Pair)
 
 # Pacbio Hifi
 | Abbreviation  | Sample | Coverage | Insertion size | Link |
@@ -26,3 +27,5 @@
 | Nano\_L1  | NA24385  | ~46x  | Reads are available [here](https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data/AshkenazimTrio/HG002_NA24385_son/UCSC_Ultralong_OxfordNanopore_Promethion/) |
 | Nano\_L2  | NA24385  | ~57x  | Reads are available [here](https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data/AshkenazimTrio/HG002_NA24385_son/Ultralong_OxfordNanopore/guppy-V3.2.4_2020-01-22/) |
 | Nano\_L3  | NA24385  | ~48x  | Reads are available [here](https://www.ncbi.nlm.nih.gov/Traces/study/?acc=SRP292617&o=acc_s%3Aa) |
+
+# HCC1395 Tumor-Normal Pair
