@@ -6,7 +6,7 @@
   - [CLR L1](#CLR-L1) 
   - [CLR L2](#CLR-L2) 
   - [CLR L3](#CLR-L3) 
-- [Oxford Nanopore Technologies](#Oxford-Nanopore-Technologies)
+- [ONT](#ONT)
   - [Nano L1](#Nano-L1)
 
 # Pacbio Hifi
@@ -28,7 +28,7 @@ Reads are available [here](https://www.ncbi.nlm.nih.gov/sra/SRX6719924)
 ### Basic Information
 **Sample:** NA24385 &nbsp; &nbsp; **Coverage:** ~29x
 
-# Oxford Nanopore Technologies
+# ONT
 ## Nano L1
 Reads are available [here](https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data/AshkenazimTrio/HG002_NA24385_son/UCSC_Ultralong_OxfordNanopore_Promethion/)
 ### Basic Information
