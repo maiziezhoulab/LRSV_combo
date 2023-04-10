@@ -10,8 +10,13 @@
   - [Nano L1](#Nano-L1)
 
 # Pacbio Hifi
-|--|--|--|
-|  |  |  |
+| Abbreviation  | Sample | Coverage | Insertion size | Link |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| Hifi\_L1  | Content Cell  | Content Cell  | Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  | Content Cell  | Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  | Content Cell  | Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  | Content Cell  | Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  | Content Cell  | Content Cell  | Content Cell  |
 ## HiFi L1
 Reads are available [here](https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data/AshkenazimTrio/HG002_NA24385_son/PacBio_CCS_15kb_20kb_chemistry2/reads/)
 ### Basic Information
