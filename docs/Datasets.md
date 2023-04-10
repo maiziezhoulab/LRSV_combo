@@ -14,6 +14,7 @@
 Reads are available [here](https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data/AshkenazimTrio/HG002_NA24385_son/PacBio_CCS_15kb_20kb_chemistry2/reads/)
 ### Basic Information
 **Sample:** NA24385 &nbsp; &nbsp; **Coverage:** ~56x
+# Pacbio CLR
 ## CLR L1
 Reads are available [here](https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data/AshkenazimTrio/HG002_NA24385_son/PacBio_MtSinai_NIST/)
 ### Basic Information
