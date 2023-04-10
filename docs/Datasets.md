@@ -29,3 +29,9 @@
 | Nano\_L3  | NA24385  | ~48x  | Reads are available [here](https://www.ncbi.nlm.nih.gov/Traces/study/?acc=SRP292617&o=acc_s%3Aa) |
 
 # HCC1395 Tumor-Normal Pair
+| Abbreviation  | Read Type | Coverage | Cell Type | Link |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| HCC1395\_PB  | Pacbio  | ~39x  | Tumor  | Reads are available [here]() |
+| HCC1395BL\_PB  | Pacbio  | ~44x  | Tumor  | Reads are available [here]() |
+| HCC1395\_PB  | Pacbio  | ~39x  | Tumor  | Reads are available [here]() |
+| HCC1395\_PB  | Pacbio  | ~39x  | Tumor  | Reads are available [here]() |
