@@ -10,6 +10,8 @@
   - [Nano L1](#Nano-L1)
 
 # Pacbio Hifi
+|--|--|--|
+|  |  |  |
 ## HiFi L1
 Reads are available [here](https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data/AshkenazimTrio/HG002_NA24385_son/PacBio_CCS_15kb_20kb_chemistry2/reads/)
 ### Basic Information
