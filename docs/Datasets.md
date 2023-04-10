@@ -1,7 +1,6 @@
 # Datasets
 # Table of contents
 - [Pacbio Hifi](#Pacbio-Hifi)
-  - [HiFi L1](#HiFi-L1) 
 - [Pacbio CLR](#Pacbio-CLR)
   - [CLR L1](#CLR-L1) 
   - [CLR L2](#CLR-L2) 
@@ -12,36 +11,11 @@
 # Pacbio Hifi
 | Abbreviation  | Sample | Coverage | Insertion size | Link |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| Hifi\_L1  | Content Cell  | Content Cell  | Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  | Content Cell  | Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  | Content Cell  | Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  | Content Cell  | Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  | Content Cell  | Content Cell  | Content Cell  |
-## HiFi L1
-Reads are available [here](https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data/AshkenazimTrio/HG002_NA24385_son/PacBio_CCS_15kb_20kb_chemistry2/reads/)
-### Basic Information
-**Sample:** NA24385 &nbsp; &nbsp; **Coverage:** ~56x &nbsp; &nbsp; **Insertion size:** 15kb and 20kb
-
-## HiFi L2
-Reads are available [here](https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data/AshkenazimTrio/HG002_NA24385_son/PacBio_CCS_10kb/)
-### Basic Information
-**Sample:** NA24385 &nbsp; &nbsp; **Coverage:** ~30x  &nbsp; &nbsp; **Insertion size:** 10kb
-
-## HiFi L3
-Reads are available [here](https://www.ncbi.nlm.nih.gov/sra/SRR8833180)
-### Basic Information
-**Sample:** NA24385 &nbsp; &nbsp; **Coverage:** ~34x  &nbsp; &nbsp; **Insertion size:** 11kb
-
-## HiFi L4
-Reads are available [here](https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data/AshkenazimTrio/HG002_NA24385_son/PacBio_CCS_15kb/)
-### Basic Information
-**Sample:** NA24385 &nbsp; &nbsp; **Coverage:** ~28x  &nbsp; &nbsp; **Insertion size:** 15kb
-
-## HiFi L5
-Reads are available [here](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA832505)
-### Basic Information
-**Sample:** NA24385 &nbsp; &nbsp; **Coverage:** ~41x  &nbsp; &nbsp; **Insertion size:** 16kb
-
+| Hifi\_L1  | NA24385  | ~56x  | 15kb and 20kb  | Reads are available [here](https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data/AshkenazimTrio/HG002_NA24385_son/PacBio_CCS_15kb_20kb_chemistry2/reads/) |
+| Hifi\_L2  | NA24385  | ~30x  | 10kb  | Reads are available [here](https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data/AshkenazimTrio/HG002_NA24385_son/PacBio_CCS_10kb/) |
+| Hifi\_L3  | NA24385  | ~34x  | 11kb  | Reads are available [here](https://www.ncbi.nlm.nih.gov/sra/SRR8833180) |
+| Hifi\_L4  | NA24385  | ~28x  | 15kb  | Reads are available [here](https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data/AshkenazimTrio/HG002_NA24385_son/PacBio_CCS_15kb/) |
+| Hifi\_L5  | NA24385  | ~41x  | 16kb  | Reads are available [here](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA832505) |
 
 # Pacbio CLR
 ## CLR L1
