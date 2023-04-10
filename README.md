@@ -1,10 +1,10 @@
 # Long Read Based SV Calling Tools Analysis
 # Table of Contents
-1. [Aligners](Aligners.md)
-2. [Assemblers](Assemblers.md)
-3. [Datasets](Datasets.md)
-4. [SV Callers](SVCallers.md)
-5. [SV Evaluators](SVEvaluators.md)
+1. [Aligners](docs/Aligners.md)
+2. [Assemblers](docs/Assemblers.md)
+3. [Datasets](docs/Datasets.md)
+4. [SV Callers](docs/SVCallers.md)
+5. [SV Evaluators](docs/SVEvaluators.md)
 6. [Analysis Code Readme](bin/ReadMe.md)
 
 # Data Availability
