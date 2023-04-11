@@ -1,4 +1,5 @@
 # SV Evaluators
+**Special Note:** The benchmark VCFs and high confidence BED file are provided [here](https://github.com/maiziezhoulab/LRSV_combo/tree/main/benchmarks) 
 # Table of Contents
 - [Truvari](#Truvari)
 - [hap-eval](#hap-eval)
