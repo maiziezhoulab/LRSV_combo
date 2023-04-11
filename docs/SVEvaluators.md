@@ -36,6 +36,47 @@ Not explicilty mentioned. Handled by Conda/Mamba/pip
 ```
 ## Commands used
 ```
+prefix=${the file name of your VCF (.vcf suffix removed)}
+ref=${reference_genome}
+bed=HG002_SVs_Tier1_v0.6_chr_noXY.bed
+
+bench=HG002_SVs_Tier1_v0.6_chr_noXY.vcf.gz
+bench_del=HG002_SVs_Tier1_v0.6_chr_del_noXY.vcf.gz
+bench_ins=HG002_SVs_Tier1_v0.6_chr_ins_noXY.vcf.gz
+
+out_dir=Truvari_${prefix}_p0
+
+p=0
+P=0.5
+r=500
+# This example is comparing the SVs within 50~1kbp size range 
+minsize=50
+maxsize=1000
+
+rm -r ${out_dir}
+
+mkdir ${out_dir}
+
+
+python vcf_filter.py -v ./${prefix}.vcf -o_dir . #if running on Dipcall result, please add --dipcall flag
+
+vcf-sort ${prefix}_DEL_INS_noXY.vcf > ${prefix}_DEL_INS_noXY_sorted.vcf
+bgzip -c ${prefix}_DEL_INS_noXY_sorted.vcf > ${prefix}_DEL_INS_noXY_sorted.vcf.gz
+tabix -p vcf ${prefix}_DEL_INS_noXY_sorted.vcf.gz
+
+vcf-sort ${prefix}_DEL_noXY.vcf > ${prefix}_DEL_noXY_sorted.vcf
+bgzip -c ${prefix}_DEL_noXY_sorted.vcf > ${prefix}_DEL_noXY_sorted.vcf.gz
+tabix -p vcf ${prefix}_DEL_noXY_sorted.vcf.gz
+
+vcf-sort ${prefix}_INS_noXY.vcf > ${prefix}_INS_noXY_sorted.vcf
+bgzip -c ${prefix}_INS_noXY_sorted.vcf > ${prefix}_INS_noXY_sorted.vcf.gz
+tabix -p vcf ${prefix}_INS_noXY_sorted.vcf.gz
+
+truvari bench -b ${bench} -c ${prefix}_DEL_INS_noXY_sorted.vcf.gz -f ${ref} -o ${out_dir}/INS_DEL_50_1k --includebed ${bed} -p ${p} -P ${P} -r ${r} --passonly --sizemin ${minsize} --sizemax ${maxsize}
+
+truvari bench -b ${bench_del} -c ${prefix}_DEL_noXY_sorted.vcf.gz -f ${ref} -o ${out_dir}/DEL_50_1k --includebed ${bed} -p ${p} -P ${P} -r ${r} --passonly --sizemin 50 --sizemax 1000
+
+truvari bench -b ${bench_ins} -c ${prefix}_INS_noXY_sorted.vcf.gz -f ${ref} -o ${out_dir}/INS_50_1k  --includebed ${bed} -p ${p} -P ${P} -r ${r} --passonly --sizemin 50 --sizemax 1000
 
 ```
 ## Other notes
