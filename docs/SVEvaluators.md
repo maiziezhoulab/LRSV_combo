@@ -74,9 +74,9 @@ tabix -p vcf ${prefix}_INS_noXY_sorted.vcf.gz
 
 truvari bench -b ${bench} -c ${prefix}_DEL_INS_noXY_sorted.vcf.gz -f ${ref} -o ${out_dir}/INS_DEL_50_1k --includebed ${bed} -p ${p} -P ${P} -r ${r} --passonly --sizemin ${minsize} --sizemax ${maxsize}
 
-truvari bench -b ${bench_del} -c ${prefix}_DEL_noXY_sorted.vcf.gz -f ${ref} -o ${out_dir}/DEL_50_1k --includebed ${bed} -p ${p} -P ${P} -r ${r} --passonly --sizemin 50 --sizemax 1000
+truvari bench -b ${bench_del} -c ${prefix}_DEL_noXY_sorted.vcf.gz -f ${ref} -o ${out_dir}/DEL_50_1k --includebed ${bed} -p ${p} -P ${P} -r ${r} --passonly --sizemin ${minsize} --sizemax ${maxsize}
 
-truvari bench -b ${bench_ins} -c ${prefix}_INS_noXY_sorted.vcf.gz -f ${ref} -o ${out_dir}/INS_50_1k  --includebed ${bed} -p ${p} -P ${P} -r ${r} --passonly --sizemin 50 --sizemax 1000
+truvari bench -b ${bench_ins} -c ${prefix}_INS_noXY_sorted.vcf.gz -f ${ref} -o ${out_dir}/INS_50_1k  --includebed ${bed} -p ${p} -P ${P} -r ${r} --passonly --sizemin ${minsize} --sizemax ${maxsize}
 
 ```
 ## Other notes
