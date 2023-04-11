@@ -25,21 +25,17 @@ https://doi.org/10.1186/s13059-022-02840-6
 ```
 ## Installation & Dependencies
 ### Installation Methods
-
+See [here](https://github.com/acenglish/truvari/wiki/Installation)
 ### Dependencies
 ```
-
+Not explicilty mentioned. Handled by Conda/Mamba/pip
 ```
-## Inputs & Outputs
-### Inputs
-
-### Outputs
-
 ## Commands used
 ```
 
 ```
 ## Other notes
+1.For more detailed usage, please refer to their [wiki page](https://github.com/ACEnglish/truvari/wiki)
 
 # hap-eval
 ## Project Links
