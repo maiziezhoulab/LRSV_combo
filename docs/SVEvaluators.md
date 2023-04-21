@@ -85,8 +85,10 @@ truvari bench -b ${bench_ins} -c ${prefix}_INS_noXY_sorted.vcf.gz -f ${ref} -o $
 # hap-eval
 ## Project Links
 ### Github Repo:
+https://github.com/Sentieon/hap-eval
 
 ### Publication:
+Currently None
 
 #### BibTeX
 ```
@@ -94,10 +96,13 @@ truvari bench -b ${bench_ins} -c ${prefix}_INS_noXY_sorted.vcf.gz -f ${ref} -o $
 ```
 ## Installation & Dependencies
 ### Installation Methods
-
+```
+git clone --recurse-submodules https://github.com/Sentieon/hap-eval.git
+pip install ./hap-eval
+```
 ### Dependencies
 ```
-
+Handled by pip
 ```
 ## Inputs & Outputs
 ### Inputs
