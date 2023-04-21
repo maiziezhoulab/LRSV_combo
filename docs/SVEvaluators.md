@@ -34,6 +34,11 @@ See [here](https://github.com/acenglish/truvari/wiki/Installation)
 ```
 Not explicilty mentioned. Handled by Conda/Mamba/pip
 ```
+## Inputs & Outputs
+### Inputs
+Bench VCF, Compared VCF, reference genome fasta file, and BED file that specifies the regions to compare
+### Outputs
+fn.vcf, fp.vcf, tp-base.vcf (TP in bench vcf), tp-call.vcf (TP in compared vcf), summary.txt (statistics like recall, precision etc.), log.txt
 ## Commands used
 ```
 prefix=${the file name of your VCF (.vcf suffix removed)}
@@ -110,7 +115,7 @@ Handled by pip
 ### Inputs
 Bench VCF, Compared VCF, reference genome fasta file, and BED file that specifies the regions to compare
 ### Outputs
-
+base_out.vcf, comp_out.vcf. Recall, precision and F1 etc. are outputted to stdout
 ## Commands used
 ```
 prefix=${the file name of your VCF (.vcf suffix removed)}
