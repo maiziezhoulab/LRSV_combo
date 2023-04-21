@@ -58,7 +58,7 @@ rm -r ${out_dir}
 mkdir ${out_dir}
 
 
-python vcf_filter.py -v ./${prefix}.vcf -o_dir . #if running on Dipcall result, please add --dipcall flag
+python vcf_filter.py -v ./${prefix}.vcf --remove_small_sv -o_dir . #if running on Dipcall result, please add --dipcall flag
 
 vcf-sort ${prefix}_DEL_INS_noXY.vcf > ${prefix}_DEL_INS_noXY_sorted.vcf
 bgzip -c ${prefix}_DEL_INS_noXY_sorted.vcf > ${prefix}_DEL_INS_noXY_sorted.vcf.gz
@@ -92,7 +92,9 @@ Currently None
 
 #### BibTeX
 ```
-
+@webpage{hapeval,
+	title  = {A VCF comparison engine for structual variant benchmarking},
+	url = {https://github.com/Sentieon/hap-eval}
 ```
 ## Installation & Dependencies
 ### Installation Methods
@@ -106,12 +108,41 @@ Handled by pip
 ```
 ## Inputs & Outputs
 ### Inputs
-
+Bench VCF, Compared VCF, reference genome fasta file, and BED file that specifies the regions to compare
 ### Outputs
 
 ## Commands used
 ```
+prefix=${the file name of your VCF (.vcf suffix removed)}
+vcf_dir=${path to the folder that contains the vcf}
 
+maxdiff=0.5
+maxdist=500
+
+ref=${reference_genome}
+bed=HG002_SVs_Tier1_v0.6_chr_noXY.bed
+
+bench_del=HG002_SVs_Tier1_v0.6_chr_del_noXY.vcf.gz
+bench_ins=HG002_SVs_Tier1_v0.6_chr_ins_noXY.vcf.gz
+
+rm -r hap-eval_${prefix}_hm
+mkdir hap-eval_${prefix}_hm
+
+cd hap-eval_${prefix}_hm
+
+python vcf_filter.py --remove_small_sv --passonly -v ${vcf_dir}/${prefix}.vcf -o_dir . #if running on Dipcall result, please add --dipcall flag
+
+vcf-sort ${prefix}_DEL_noXY_passonly.vcf > ${prefix}_DEL_noXY_passonly_sorted.vcf
+bgzip -c ${prefix}_DEL_noXY_passonly_sorted.vcf > ${prefix}_DEL_noXY_passonly_sorted.vcf.gz
+tabix -p vcf ${prefix}_DEL_noXY_passonly_sorted.vcf.gz
+
+vcf-sort ${prefix}_INS_noXY_passonly.vcf > ${prefix}_INS_noXY_passonly_sorted.vcf
+bgzip -c ${prefix}_INS_noXY_passonly_sorted.vcf > ${prefix}_INS_noXY_passonly_sorted.vcf.gz
+tabix -p vcf ${prefix}_INS_noXY_passonly_sorted.vcf.gz
+
+hap_eval -r ${ref} -i ${bed} -b ${bench_del} -c ${prefix}_DEL_noXY_passonly_sorted.vcf.gz --base_out DEL_base_out.vcf --comp_out DEL_comp_out.vcf --maxdist ${maxdist} --minsize 50 --maxdiff ${maxdiff}
+
+hap_eval -r ${ref} -i ${bed} -b ${bench_ins} -c ${prefix}_INS_noXY_passonly_sorted.vcf.gz --base_out INS_base_out.vcf --comp_out INS_comp_out.vcf --maxdist ${maxdist} --minsize 50 --maxdiff ${maxdiff}
 ```
 ## Other notes
 ### Pipeline and parameter definition
