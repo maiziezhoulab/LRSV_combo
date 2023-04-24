@@ -11,6 +11,10 @@
 1. [Data Availability](#Data-Availability)
 
 # Intro
+In this project, we comprehensively evaluated the performance of 16 long read based SV calling methods along with 4 upstream aligners and 7 assemblers, and offered guidelines and recommendations under 28 criteria for users to select the optimal tools based on different scenarios and directions for further method development. The pipeline of our evaluation was shown as below:
+
+
 ![pipeline](docs/pipeline.png)
+
 # Data Availability
 All VCF files generated for evaluation can be found [zenodo](https://doi.org/10.5281/zenodo.7199897).
