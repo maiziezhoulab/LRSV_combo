@@ -10,4 +10,4 @@
 # Data Availability
 All VCF files generated for evaluation can be found [zenodo](https://doi.org/10.5281/zenodo.7199897).
 
-![test](docs/pipeline.pdf)
+![test](docs/pipeline.png)
