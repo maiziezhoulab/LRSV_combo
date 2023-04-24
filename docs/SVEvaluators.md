@@ -152,6 +152,26 @@ hap_eval -r ${ref} -i ${bed} -b ${bench_ins} -c ${prefix}_INS_noXY_passonly_sort
 ## Other notes
 ### Pipeline and parameter definition
 ![pipeline](hap-eval_parameters_meaning.png)
+
+### Limitations
+1. hap-eval has a built-in filter that will only take the SV records that have `PASS` in the `FILTER` field (similar to the `--passonly` flag in Truvari). This can be disabled, but need to modify the source code.
+2. hap-eval requires genotype information, otherwise the output will be all zero
+3. hap-eval may not be compatitable with the VCF header provided by some callers:
+	```
+	cuteSV
+	##FORMAT=<ID=DR,Number=1,Type=String,Description="# High-quality reference reads">
+	##FORMAT=<ID=DV,Number=1,Type=String,Description="# High-quality variant reads">
+	##FORMAT=<ID=PL,Number=G,Type=String,Description="# Phred-scaled genotype likelihoods rounded to the closest integer">
+	##FORMAT=<ID=GQ,Number=1,Type=String,Description="# Genotype quality">
+	                                ^
+	Original: Integer Now: String
+
+	DeBreak
+	##INFO=<ID=MAPQ,Number=1,Type=Float,Description="Mean mapping quality of supporting reads">
+	                                ^
+	Original: Integer Now: Float
+	```
+
 # SURVIVOR
 ## Project Links
 ### Github Repo:
