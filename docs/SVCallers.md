@@ -622,7 +622,7 @@ tar -jxf dipcall-0.3_x64-linux.tar.bz2
 #### Input
 Assembled contigs, bed (see [here](https://github.com/lh3/dipcall/tree/master/data), choose the bed file that corresponds to your reference file, this is only required for male sample)
 #### Output
-vcf file
+The final output of dipcall includes two files: prefix.dip.vcf.gz and prefix.dip.bed.
 ### Commands used
 ```
 bed=your_downloaded_bed
