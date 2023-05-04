@@ -213,6 +213,7 @@ Not specified
 ## Inputs & Outputs
 ### Inputs
 tumor cell VCF file
+
 normal cell VCF file
 ### Outputs
 Tumor-specific VCF file
