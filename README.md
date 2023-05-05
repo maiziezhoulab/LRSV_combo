@@ -7,7 +7,7 @@
     1. [Assemblers](docs/Assemblers.md)
     1. [SV Callers](docs/SVCallers.md)
     1. [SV Evaluators](docs/SVEvaluators.md)
-1. [Analysis Code Readme](bin/ReadMe.md)
+1. [Analysis Code Readme](bin/README.md)
 1. [Data Availability](#Data-Availability)
 
 # Intro
