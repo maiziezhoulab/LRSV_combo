@@ -7,8 +7,7 @@ parser = ArgumentParser(description="",usage='use "python3 %(prog)s --help" for 
 parser.add_argument('--callvcf','-callvcf')
 parser.add_argument('--outdir','-o')
 parser.add_argument('--dist_thresh','-d',type = int, default = 1000)
-parser.add_argument('--benchfile','-bench',help="optional, default = /data/maiziezhou_lab/CanLuo/LRSV_Project/Downstream_Analysis/Simulator_Analysis/Translocation/benchmark/bench.txt",
-	default = "/data/maiziezhou_lab/CanLuo/LRSV_Project/Downstream_Analysis/Simulator_Analysis/Translocation/benchmark/bench.txt")
+parser.add_argument('--benchfile','-bench')
 
 args = parser.parse_args()
 callvcf = args.callvcf
