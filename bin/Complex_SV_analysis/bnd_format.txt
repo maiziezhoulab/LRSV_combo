@@ -1,0 +1,20 @@
+@FF
+S1	N[S2[
+S1	]S2]N
+E1	]E2]N
+E1	N[E2[
+@RR
+S1	N]E2]
+S1	[E2[N
+E1	N]S2]
+E1	[S2[N
+@FR
+S1	N]E2]
+S1	]S2]N
+E1	N[E2[
+E1	[S2[N
+@RF
+S1	N[S2[
+S1	[E2[N
+E1	]E2]N
+E1	N]S2]
