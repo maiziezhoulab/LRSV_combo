@@ -8,8 +8,7 @@ parser.add_argument('--callvcf','-callvcf')
 parser.add_argument('--outdir','-o')
 parser.add_argument('--dist_thresh','-d',type = int, default = 500)
 parser.add_argument('--min_size_sim','-P',type = float, default = 0.5)
-parser.add_argument('--benchfile','-bench',help="optional, default = /data/maiziezhou_lab/Yichen/Projects/LRSV_Project/nc_review_analysis/SV_simulation/workdir/sim_dup.bed",
-	default = "/data/maiziezhou_lab/Yichen/Projects/LRSV_Project/nc_review_analysis/SV_simulation/workdir/sim_dup.bed")
+parser.add_argument('--benchfile','-bench')
 
 args = parser.parse_args()
 callvcf = args.callvcf
