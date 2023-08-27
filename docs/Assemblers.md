@@ -386,6 +386,7 @@ ipa local --nthreads 25 --njobs 4 -i ${reads}
 ```
 ### Other notes
 1. We have only run IPA in local mode (on a single node), for running IPA in dist mode, please see read their [github repo](https://github.com/PacificBiosciences/pbbioconda/wiki/Improved-Phased-Assembler)
+2. For more information about IPA's output, please check [this post](https://github.com/PacificBiosciences/pbbioconda/issues/350)
 
 
 ## Shasta (2020)
