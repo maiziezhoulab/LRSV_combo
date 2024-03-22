@@ -18,3 +18,7 @@ In this project, we comprehensively evaluated the performance of 16 long read ba
 
 # Data Availability
 All VCF files generated for evaluation can be found [zenodo](https://zenodo.org/record/8287836).
+
+## Citation:
+#### Liu YH, Luo C, Golding SG, Ioffe JB, Zhou XM. Tradeoffs in alignment and assembly-based methods for structural variant detection with long-read sequencing data. Nat Commun. 2024 Mar 19;15(1):2447. PubMed PMID: 38503752.
+
